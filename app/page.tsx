@@ -22,6 +22,7 @@ const page = () => {
       <ReviewsSection />
       <RidgewellFAQCTA  />
       <Footer />
+      <div></div>
     </div>
   );
 };
