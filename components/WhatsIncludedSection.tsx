@@ -31,13 +31,15 @@ import DesertHorizonEdge from "@/components/Deserthorizon";
 
 /** Default service images — paths match public/services filenames exactly */
 const DEFAULT_IMAGES = {
-  design: "/services/xeriscaping_land.png",
-  beforeLawn: "/services/After_xeriscape_image.png",
-  afterXeri: "/services/Before_xesriscape_image.png",
-  rockGravel: "/services/Decorative_rock_gravel.png",
-  plants: "/services/Drought_resistant_plants.png",
-  irrigation: "/services/Smart_irrigation_system.png",
-  walkway: "/services/Walkways_outdoor_features.png",
+  design: "/services/hardscaping_land.png",
+  beforeLawn: "/services/After_hardscaping_image.png",
+  afterXeri: "/services/Before_hardscaping_image.png",
+  rockGravel: "/services/Retaining_walls.png",
+  plants: "/services/Firepts_seating.png",
+  irrigation: "/services/outdoorkitchens.png",
+  walkway: "/services/paver_patios.png",
+  poolside: "/services/poolside.png",
+  border: "/services/border.png",
 } as const;
 
 // ─── Topo background lines (decorative only, no illustrations) ───────────────
@@ -818,14 +820,14 @@ export default function ServicesSection({
       title: "Poolside Hardscaping & Stone Decking",
       body: "Add safe, stylish poolside surfaces with durable stone decking built for comfort, drainage, and long term use",
       accent: "Finishing Touch",
-      image: img("walkway", "Walkway and Outdoor Features"),
+      image: img("poolside", "Walkway and Outdoor Features"),
     },
     {
       number: "08",
       title: "Landscape Borders & Edging Systems",
       body: "Give your landscape a cleaner, more finished look with durable edging that keeps everything organized and defined",
       accent: "Finishing Touch",
-      image: img("walkway", "Walkway and Outdoor Features"),
+      image: img("border", "Walkway and Outdoor Features"),
     },
   ];
 

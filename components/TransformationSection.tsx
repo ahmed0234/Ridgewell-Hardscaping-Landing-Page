@@ -15,7 +15,7 @@ const transformations = [
     afterImage: "/beforeandafter/before_1.png",
     beforeAlt: "Dry patchy lawn before hardscaping",
     afterAlt: "Modern xeriscape with gravel and native plants",
-    title: "Paver Patio Installation",
+    title: "Paver Patios with Fire Pits & Seating",
     location: "Denver, CO",
     waterSaved: "-62% Water",
   },
@@ -24,13 +24,13 @@ const transformations = [
     afterImage: "/beforeandafter/before_2.png",
     beforeAlt: "Overgrown backyard before redesign",
     afterAlt: "Elegant courtyard with succulents and fire pit",
-    title: "Outdoor Kitchen & Entertainment Space",
+    title: "Custom Retaining Walls & Stone Features",
     location: "Lakewood, CO",
     waterSaved: "-55% Water",
   },
   {
-    beforeImage: "/beforeandafter/after_3.png",
-    afterImage: "/beforeandafter/before_3.png",
+    beforeImage: "/beforeandafter/walkway_before.png",
+    afterImage: "/beforeandafter/walkway_after.png",
     beforeAlt: "Bare entrance with dead grass",
     afterAlt: "Architectural desert garden with ornamental grasses",
     title: "Walkways, Steps & Stone Paths",
@@ -44,6 +44,15 @@ const transformations = [
     afterAlt: "Architectural desert garden with ornamental grasses",
     title: "Paver Patios with Premium Outdoor Features",
     location: "Broomfield, CO",
+    waterSaved: "-71% Water",
+  },
+  {
+    beforeImage: "/beforeandafter/outdoorkitchen_after.png",
+    afterImage: "/beforeandafter/outdoorkitchen_before.png",
+    beforeAlt: "Bare entrance with dead grass",
+    afterAlt: "Architectural desert garden with ornamental grasses",
+    title: "Outdoor Kitchens",
+    location: "Parker, CO",
     waterSaved: "-71% Water",
   },
 ];
@@ -171,7 +180,7 @@ export default function TransformationSection() {
             >
               <p className="text-base lg:text-xl text-foreground/55 font-body leading-normal font-satoshi">
                 Real transformations that turn plain outdoor spaces into
-                functional, high end hardscapes built for everyday living. {" "}
+                functional, high end hardscapes built for everyday living.{" "}
                 <strong className="text-foreground/80 font-semibold font-satoshi">
                   More beauty. More value. Built to last
                 </strong>

@@ -362,7 +362,7 @@ function CTASection() {
         className="absolute inset-[-10%] bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://st.hzcdn.com/simgs/b351ae5703c29ba6_14-7164/home-design.jpg')",
+            "url('/home-design.png')",
           y: bgY,
           filter: "saturate(0.75)",
         }}

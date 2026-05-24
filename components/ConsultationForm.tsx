@@ -25,6 +25,67 @@ const SERVICES = [
   "Not Sure Yet",
 ];
 
+/** JSON body sent to POST /api/consultation */
+export type ConsultationRequestBody = {
+  /** Full name (2–80 characters) */
+  name: string;
+  /** Phone as entered by the user (10–15 digits when normalized) */
+  phone: string;
+  /** Valid email address */
+  email: string;
+  /** 5-digit US ZIP, e.g. "80202" */
+  zip: string;
+  /** One of the SERVICES options */
+  service: string;
+};
+
+const CONSULTATION_API = "http://localhost:3001/api/contact";
+
+function normalizePhone(value: string) {
+  return value.replace(/\D/g, "");
+}
+
+function validateForm(form: ConsultationRequestBody): Record<string, string> {
+  const e: Record<string, string> = {};
+  const name = form.name.trim();
+  const phoneDigits = normalizePhone(form.phone);
+  const email = form.email.trim();
+  const zip = form.zip.trim();
+
+  if (!name) e.name = "Please enter your name.";
+  else if (name.length < 2) e.name = "Name should be at least 2 characters.";
+  else if (name.length > 80) e.name = "Name is a bit long — please shorten it.";
+
+  if (!form.phone.trim()) e.phone = "Please enter a phone number.";
+  else if (phoneDigits.length < 10)
+    e.phone = "Please enter a valid 10-digit phone number.";
+  else if (phoneDigits.length > 15) e.phone = "Phone number looks too long.";
+
+  if (!email) e.email = "Please enter your email.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email))
+    e.email = "Please enter a valid email address.";
+  else if (email.length > 120) e.email = "Email address is too long.";
+
+  if (!zip) e.zip = "Please enter your ZIP code.";
+  else if (!/^\d{5}$/.test(zip)) e.zip = "ZIP should be 5 digits (e.g. 80202).";
+
+  if (!form.service) e.service = "Please select a service.";
+  else if (!SERVICES.includes(form.service as (typeof SERVICES)[number]))
+    e.service = "Please choose a service option.";
+
+  return e;
+}
+
+function buildPayload(form: ConsultationRequestBody): ConsultationRequestBody {
+  return {
+    name: form.name.trim(),
+    phone: form.phone.trim(),
+    email: form.email.trim(),
+    zip: form.zip.trim(),
+    service: form.service,
+  };
+}
+
 // ─── Field Wrapper ────────────────────────────────────────────────────────────
 function Field({
   label,
@@ -83,7 +144,6 @@ function Input({
       onFocus={onFocus}
       onBlur={onBlur}
       className="w-full bg-background/40 hover:bg-background/60 focus:bg-background/80 text-foreground placeholder:text-foreground/45 border border-foreground/15 hover:border-foreground/30 focus:border-[#E86240] focus:ring-4 focus:ring-[#E86240]/15 transition-all duration-200 rounded-xl px-4 py-3.5 outline-none font-satoshi text-[13.5px] shadow-[inset_0_1.5px_3px_rgba(70,30,45,0.04)]"
-      autoComplete="off"
       {...rest}
     />
   );
@@ -130,36 +190,85 @@ export default function ConsultationForm() {
   });
   const [focused, setFocused] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const set = (k: string) => (e: any) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set =
+    (k: keyof ConsultationRequestBody) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const value = e.target.value;
+      setForm((f) => ({ ...f, [k]: value }));
+      setErrors((prev) => {
+        if (!prev[k]) return prev;
+        const next = { ...prev };
+        delete next[k];
+        return next;
+      });
+      setSubmitError(null);
+    };
+
+  const setZip = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, "").slice(0, 5);
+    setForm((f) => ({ ...f, zip: digits }));
+    setErrors((prev) => {
+      if (!prev.zip) return prev;
+      const next = { ...prev };
+      delete next.zip;
+      return next;
+    });
+    setSubmitError(null);
+  };
+
   const on = (k: string) => () => setFocused((f) => ({ ...f, [k]: true }));
   const off = (k: string) => () => setFocused((f) => ({ ...f, [k]: false }));
 
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.phone.trim()) e.phone = "Phone number is required";
-    if (!form.email.includes("@")) e.email = "Valid email required";
-    if (!form.zip.trim() || form.zip.length < 5) e.zip = "Valid ZIP required";
-    if (!form.service) e.service = "Please select a service";
-    return e;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length) {
+    setSubmitError(null);
+
+    const errs = validateForm(form);
+    if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
+
+    const payload = buildPayload(form);
     setErrors({});
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+
+    try {
+      const res = await fetch(CONSULTATION_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as {
+        success?: boolean;
+        message?: string;
+        errors?: Record<string, string>;
+      };
+
+      if (!res.ok) {
+        if (data.errors && typeof data.errors === "object") {
+          setErrors(data.errors);
+        }
+        setSubmitError(
+          data.message ??
+            "We couldn't send your request. Please try again or call us directly.",
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Network error — please check your connection and try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -344,27 +453,25 @@ export default function ConsultationForm() {
                 <div className="flex flex-col gap-2">
                   <h3
                     style={{
-                      fontFamily: "'Clash Display', sans-serif",
                       fontSize: "1.55rem",
                       fontWeight: 700,
                       color: C.deepPlum,
                       letterSpacing: "-0.018em",
                     }}
+                    className="font-poppins font-semibold"
                   >
                     You're on the list!
                   </h3>
                   <p
                     style={{
-                      fontSize: 13,
-                      lineHeight: 1.7,
                       color: "rgba(76,39,51,0.75)",
-                      fontFamily: "'Satoshi', sans-serif",
                       maxWidth: 268,
                       margin: "0 auto",
                     }}
+                    className="font-sans leading-tight text-base font-semibold"
                   >
                     We'll reach out within 1 business day to schedule your free
-                    xeriscape design consultation.
+                    Hardscape design consultation.
                   </p>
                 </div>
               </motion.div>
@@ -431,10 +538,12 @@ export default function ConsultationForm() {
                         <Input
                           id={`${uid}-name`}
                           placeholder="Jane Smith"
+                          autoComplete="name"
                           value={form.name}
                           onChange={set("name")}
                           onFocus={on("name")}
                           onBlur={off("name")}
+                          aria-invalid={!!errors.name}
                         />
                       </Field>
                       <Field
@@ -446,10 +555,12 @@ export default function ConsultationForm() {
                           id={`${uid}-phone`}
                           type="tel"
                           placeholder="(720) 555-0100"
+                          autoComplete="tel"
                           value={form.phone}
                           onChange={set("phone")}
                           onFocus={on("phone")}
                           onBlur={off("phone")}
+                          aria-invalid={!!errors.phone}
                         />
                       </Field>
                     </div>
@@ -463,10 +574,12 @@ export default function ConsultationForm() {
                         id={`${uid}-email`}
                         type="email"
                         placeholder="jane@example.com"
+                        autoComplete="email"
                         value={form.email}
                         onChange={set("email")}
                         onFocus={on("email")}
                         onBlur={off("email")}
+                        aria-invalid={!!errors.email}
                       />
                     </Field>
 
@@ -478,11 +591,13 @@ export default function ConsultationForm() {
                       <Input
                         id={`${uid}-zip`}
                         placeholder="80202"
+                        inputMode="numeric"
                         maxLength={5}
                         value={form.zip}
-                        onChange={set("zip")}
+                        onChange={setZip}
                         onFocus={on("zip")}
                         onBlur={off("zip")}
+                        aria-invalid={!!errors.zip}
                       />
                     </Field>
 
@@ -497,21 +612,38 @@ export default function ConsultationForm() {
                         onChange={set("service")}
                         onFocus={on("service")}
                         onBlur={off("service")}
+                        aria-invalid={!!errors.service}
                       />
                     </Field>
                   </div>
 
                   {/* ── FOOTER / CTA ──────────────────────────────────── */}
                   <div className="px-7 pb-7 flex flex-col gap-4">
-                    <motion.a
+                    <AnimatePresence>
+                      {submitError && (
+                        <motion.p
+                          role="alert"
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                          className="font-satoshi text-sm font-semibold text-center px-4 py-3 rounded-xl"
+                          style={{
+                            color: C.deepPlum,
+                            background: "rgba(232,98,64,0.12)",
+                            border: "1px solid rgba(232,98,64,0.28)",
+                          }}
+                        >
+                          {submitError}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+
+                    <motion.button
                       type="submit"
-                      href="#consultation"
-                      whileHover={{
-                        scale: 1.04,
-                        y: -2,
-                      }}
-                      whileTap={{ scale: 0.96 }}
-                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-8 py-4.5"
+                      disabled={loading}
+                      whileHover={loading ? {} : { scale: 1.04, y: -2 }}
+                      whileTap={loading ? {} : { scale: 0.96 }}
+                      className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl px-8 py-4.5 disabled:opacity-75 disabled:cursor-not-allowed"
                       style={{
                         background:
                           "linear-gradient(135deg, #D94F2B 0%, #E86240 45%, #C63E1D 100%)",
@@ -568,7 +700,7 @@ export default function ConsultationForm() {
 
                       {/* edge highlight */}
                       <div
-                        className="absolute inset-px rounded-[15px] pointer-events-none"
+                        className="absolute inset-[1px] rounded-[15px] pointer-events-none"
                         style={{
                           border: "1px solid rgba(255,255,255,0.08)",
                         }}
@@ -582,20 +714,25 @@ export default function ConsultationForm() {
                           fontFamily: "Satoshi, sans-serif",
                         }}
                       >
-                        Get Your Free Design Consultation
-                        <motion.span
-                          animate={{ x: [0, 4, 0] }}
-                          transition={{
-                            duration: 1.2,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className="text-lg"
-                        >
-                          →
-                        </motion.span>
+                        {loading
+                          ? "Sending…"
+                          : "Get Your Free Design Consultation"}
+                        {!loading && (
+                          <motion.span
+                            animate={{ x: [0, 4, 0] }}
+                            transition={{
+                              duration: 1.2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                            className="text-lg"
+                            aria-hidden
+                          >
+                            →
+                          </motion.span>
+                        )}
                       </span>
-                    </motion.a>
+                    </motion.button>
 
                     <p
                       className="text-center"

@@ -226,23 +226,6 @@ export default function BeforeAfterSlider({
             {location}
           </p>
         </div>
-        <div className="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-foreground/6 border border-foreground/10">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#E86240"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-          </svg>
-          <span className="text-xs font-bold text-foreground/70 tabular-nums">
-            {waterSaved}
-          </span>
-        </div>
       </div>
     </div>
   );
