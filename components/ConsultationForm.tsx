@@ -16,10 +16,12 @@ const C = {
 };
 
 const SERVICES = [
-  "Front Yard Xeriscape",
-  "Backyard Xeriscape",
-  "Full Property Transformation",
-  "Replace Grass / Lower Maintenance",
+  "Paver Patio Installation",
+  "Outdoor Fire Pit & Seating Area",
+  "Retaining Wall Installation",
+  "Outdoor Kitchen & Entertainment Space",
+  "Walkways, Steps & Stone Paths",
+  "Poolside Patio & Stone Decking",
   "Not Sure Yet",
 ];
 

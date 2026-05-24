@@ -20,9 +20,8 @@ const page = () => {
       <PainProblemSection />
       <TrustBar />
       <ReviewsSection />
-      <RidgewellFAQCTA  />
+      <RidgewellFAQCTA />
       <Footer />
-      <div></div>
     </div>
   );
 };

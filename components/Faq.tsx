@@ -27,7 +27,8 @@ const faqs: FAQItem[] = [
   },
   {
     id: 2,
-    question: "Will pavers and stonework survive Colorado winters without cracking?",
+    question:
+      "Will pavers and stonework survive Colorado winters without cracking?",
     answer:
       "Yes when they're built the right way. Cheap installs fail after one freeze thaw cycle. Ridgewell uses engineered base work, proper drainage, and premium materials designed for Colorado's harsh seasons. That's how our patios, walkways, and retaining walls resist shifting, cracking, and the constant repairs homeowners are tired of paying for.",
   },
