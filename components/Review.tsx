@@ -31,7 +31,7 @@ const reviews: Review[] = [
     initials: "KW",
     location: "Castle Rock, CO",
     rating: 5,
-    text: "We had a sinking walkway, failing retaining wall, and drainage that turned the yard into mud every spring. Ridgewell rebuilt everything with premium pavers and proper base work. The crew was professional, fast, and left the property spotless. Curb appeal went up immediately — two neighbors have already asked who we used.",
+    text: "We had a sinking walkway, failing retaining wall, and drainage that turned the yard into mud every spring. Ridgewell rebuilt everything with premium pavers and proper base work. The crew was professional, fast, and left the property spotless. Curb appeal went up immediately two neighbors have already asked who we used.",
     date: "1 month ago",
   },
   {

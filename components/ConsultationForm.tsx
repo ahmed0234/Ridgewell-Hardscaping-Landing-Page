@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useId } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { PiCheckCircle, PiLeafLight } from "react-icons/pi";
 
@@ -37,9 +38,13 @@ export type ConsultationRequestBody = {
   zip: string;
   /** One of the SERVICES options */
   service: string;
+  /** Optional comments from the user */
+  comments: string;
 };
 
-const CONSULTATION_API = "http://localhost:3001/api/contact";
+// https://ridgewellbackend.vercel.app/api/contact 
+
+const CONSULTATION_API = "http://localhost:3000/api/contact";
 
 function normalizePhone(value: string) {
   return value.replace(/\D/g, "");
@@ -83,6 +88,7 @@ function buildPayload(form: ConsultationRequestBody): ConsultationRequestBody {
     email: form.email.trim(),
     zip: form.zip.trim(),
     service: form.service,
+    comments: form.comments.trim(),
   };
 }
 
@@ -178,15 +184,43 @@ function Select({ id, value, onChange, onFocus, onBlur, ...rest }: any) {
   );
 }
 
+// ─── Textarea ─────────────────────────────────────────────────────────────────
+function Textarea({
+  id,
+  placeholder,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  rows = 4,
+  ...rest
+}: any) {
+  return (
+    <textarea
+      id={id}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      rows={rows}
+      className="w-full bg-background/40 hover:bg-background/60 focus:bg-background/80 text-foreground placeholder:text-foreground/45 border border-foreground/15 hover:border-foreground/30 focus:border-[#E86240] focus:ring-4 focus:ring-[#E86240]/15 transition-all duration-200 rounded-xl px-4 py-3.5 outline-none font-satoshi text-[13.5px] shadow-[inset_0_1.5px_3px_rgba(70,30,45,0.04)] resize-y"
+      {...rest}
+    />
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function ConsultationForm() {
   const uid = useId();
+  const router = useRouter();
   const [form, setForm] = useState({
     name: "",
     phone: "",
     email: "",
     zip: "",
     service: "",
+    comments: "",
   });
   const [focused, setFocused] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -196,7 +230,11 @@ export default function ConsultationForm() {
 
   const set =
     (k: keyof ConsultationRequestBody) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >,
+    ) => {
       const value = e.target.value;
       setForm((f) => ({ ...f, [k]: value }));
       setErrors((prev) => {
@@ -235,40 +273,17 @@ export default function ConsultationForm() {
 
     const payload = buildPayload(form);
     setErrors({});
-    setLoading(true);
 
-    try {
-      const res = await fetch(CONSULTATION_API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+    // Fire the API call without awaiting — redirect immediately
+    fetch(CONSULTATION_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).catch(() => {
+      // Silently swallow network errors — user is already on /thankyou
+    });
 
-      const data = (await res.json().catch(() => ({}))) as {
-        success?: boolean;
-        message?: string;
-        errors?: Record<string, string>;
-      };
-
-      if (!res.ok) {
-        if (data.errors && typeof data.errors === "object") {
-          setErrors(data.errors);
-        }
-        setSubmitError(
-          data.message ??
-            "We couldn't send your request. Please try again or call us directly.",
-        );
-        return;
-      }
-
-      setSubmitted(true);
-    } catch {
-      setSubmitError(
-        "Network error — please check your connection and try again.",
-      );
-    } finally {
-      setLoading(false);
-    }
+    router.push("/thankyou");
   };
 
   return (
@@ -375,7 +390,7 @@ export default function ConsultationForm() {
         }}
       />
 
-      <div className="relative" style={{ zIndex: 10 }}>
+      <div className="relative" style={{ zIndex: 10 }} id="Form">
         {/* ══ INNER GLASS CARD ════════════════════════════════════════════
             Sits on top of the rotating border (z-10), isolates blur so
             the backdrop-filter only applies inside the card.
@@ -453,25 +468,27 @@ export default function ConsultationForm() {
                 <div className="flex flex-col gap-2">
                   <h3
                     style={{
+                      fontFamily: "'Clash Display', sans-serif",
                       fontSize: "1.55rem",
                       fontWeight: 700,
                       color: C.deepPlum,
                       letterSpacing: "-0.018em",
                     }}
-                    className="font-poppins font-semibold"
                   >
                     You're on the list!
                   </h3>
                   <p
                     style={{
+                      fontSize: 13,
+                      lineHeight: 1.7,
                       color: "rgba(76,39,51,0.75)",
+                      fontFamily: "'Satoshi', sans-serif",
                       maxWidth: 268,
                       margin: "0 auto",
                     }}
-                    className="font-sans leading-tight text-base font-semibold"
                   >
                     We'll reach out within 1 business day to schedule your free
-                    Hardscape design consultation.
+                    xeriscape design consultation.
                   </p>
                 </div>
               </motion.div>
@@ -613,6 +630,23 @@ export default function ConsultationForm() {
                         onFocus={on("service")}
                         onBlur={off("service")}
                         aria-invalid={!!errors.service}
+                      />
+                    </Field>
+
+                    <Field
+                      label="Comments"
+                      id={`${uid}-comments`}
+                      error={errors.comments}
+                    >
+                      <Textarea
+                        id={`${uid}-comments`}
+                        placeholder="Tell us about your project, timing, budget, or any specific ideas you have..."
+                        value={form.comments}
+                        onChange={set("comments")}
+                        onFocus={on("comments")}
+                        onBlur={off("comments")}
+                        aria-invalid={!!errors.comments}
+                        rows={2}
                       />
                     </Field>
                   </div>

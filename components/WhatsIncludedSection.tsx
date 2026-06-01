@@ -27,7 +27,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { motion, useInView } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import DesertHorizonEdge from "@/components/Deserthorizon";
+import DesertHorizonEdge from "./Deserthorizon";
 
 /** Default service images — paths match public/services filenames exactly */
 const DEFAULT_IMAGES = {
@@ -40,7 +40,11 @@ const DEFAULT_IMAGES = {
   walkway: "/services/paver_patios.png",
   poolside: "/services/poolside.png",
   border: "/services/border.png",
+  afterTurf: "/services/beforeTurf.png",
+  beforeTurf: "/services/afterTurf.png",
 } as const;
+
+// ─── Topo background lines (decorative only, no illustrations) ───────────────
 
 // ─── Topo background lines (decorative only, no illustrations) ───────────────
 
@@ -174,10 +178,10 @@ const HeroServiceBlock = ({ service, index }) => {
       <div className="absolute bottom-0 left-0 right-0 z-[2] p-8 lg:p-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
         <div className="flex flex-col gap-4 max-w-xl">
           <h3
-            className="font-poppins font-bold leading-tight"
+            className="font-sans font-black leading-tight"
             style={{
               color: "#F4DEBF",
-              fontSize: "clamp(1.85rem, 3.8vw, 2.7rem)",
+              fontSize: "clamp(1.85rem, 3.8vw, 2.8rem)",
               letterSpacing: "-0.025em",
               textShadow: "0 2px 24px rgba(0,0,0,0.5)",
             }}
@@ -227,9 +231,11 @@ type CompareImage = { src: string; alt: string };
 const BeforeAfterCompareSlider = ({
   beforeImage,
   afterImage,
+  title,
 }: {
   beforeImage: CompareImage;
   afterImage: CompareImage;
+  title?: string;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
@@ -380,7 +386,7 @@ const BeforeAfterCompareSlider = ({
         </div>
       </div>
 
-      {/* Before badge */}
+      {/* Before badge — always top-left */}
       <div className="absolute top-5 left-5 z-10 pointer-events-none">
         <div
           className="flex items-center gap-2 px-4 py-2 rounded-full"
@@ -404,50 +410,102 @@ const BeforeAfterCompareSlider = ({
         </div>
       </div>
 
-      {/* After badge */}
-      <div className="absolute top-5 right-5 z-10 pointer-events-none">
-        <div
-          className="flex items-center gap-2 px-4 py-2 rounded-full"
-          style={{
-            background: "rgba(232,98,64,0.18)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            border: "1px solid rgba(232,98,64,0.4)",
-          }}
-        >
-          <span
-            className="block w-2 h-2 rounded-full shrink-0"
-            style={{ background: "#E86240" }}
-          />
-          <span
-            className="font-satoshi font-bold text-xs tracking-widest uppercase"
-            style={{ color: "#E86240" }}
-          >
-            After
-          </span>
-        </div>
-      </div>
-
-      {/* Drag hint */}
-      <p
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 font-satoshi text-[10px] sm:text-xs font-semibold tracking-[0.14em] uppercase pointer-events-none px-4 py-1.5 rounded-full"
+      {/* Unified bottom bar: gradient scrim + title (left) + drag cue (right) */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none flex items-end justify-between gap-4"
         style={{
-          color: "rgba(244,222,191,0.7)",
-          background: "rgba(70,30,45,0.55)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
-          border: "1px solid rgba(244,222,191,0.1)",
+          padding: "clamp(1rem, 3vw, 1.75rem)",
+          background:
+            "linear-gradient(to top, rgba(46,18,30,0.78) 0%, rgba(46,18,30,0.42) 45%, transparent 100%)",
         }}
       >
-        Drag to compare
-      </p>
+        {/* Comparison title */}
+        {title ? (
+          <span
+            className="font-sans font-black leading-tight"
+            style={{
+              color: "#F4DEBF",
+              fontSize: "clamp(1.05rem, 2.2vw, 1.8rem)",
+              letterSpacing: "-0.02em",
+              textShadow: "0 2px 20px rgba(0,0,0,0.65)",
+            }}
+          >
+            {title}
+          </span>
+        ) : (
+          <span />
+        )}
+
+        {/* Drag cue — icon + label, horizontally unified */}
+        <div
+          className="flex items-center gap-2 px-3.5 py-2 rounded-full shrink-0"
+          style={{
+            background: "rgba(70,30,45,0.62)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            border: "1px solid rgba(244,222,191,0.13)",
+          }}
+        >
+          {/* Left chevron */}
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M7.5 2L4 6l3.5 4"
+              stroke="rgba(244,222,191,0.7)"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span
+            className="font-satoshi font-semibold tracking-[0.13em] uppercase"
+            style={{
+              color: "rgba(244,222,191,0.72)",
+              fontSize: "clamp(9px, 1.1vw, 11px)",
+            }}
+          >
+            Drag to compare
+          </span>
+          {/* Right chevron */}
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4.5 2L8 6l-3.5 4"
+              stroke="rgba(244,222,191,0.7)"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   );
 };
 
 // ─── BLOCK 2 — Before / After Conversion (Signature Block) ───────────────────
 
-const BeforeAfterBlock = ({ beforeImage, afterImage, index }) => {
+const BeforeAfterBlock = ({
+  beforeImage,
+  afterImage,
+  index,
+  title,
+}: {
+  beforeImage: CompareImage;
+  afterImage: CompareImage;
+  index: number;
+  title?: string;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 36 }}
@@ -458,37 +516,9 @@ const BeforeAfterBlock = ({ beforeImage, afterImage, index }) => {
         delay: index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="w-full pt-4"
+      className="w-full pt-4 z-99999"
     >
-      {/* Title row */}
-      <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <div>
-          <h3
-            className="font-sans font-black leading-tight mb-3"
-            style={{
-              color: "#F4DEBF",
-              fontSize: "clamp(1.65rem, 3.2vw, 2.45rem)",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Lawn to Hardscape Conversion
-          </h3>
-          <p
-            className="font-sans font-medium leading-snug max-w-lg"
-            style={{
-              color: "rgba(244,222,191,0.85)",
-              fontSize: "clamp(0.88rem, 1.5vw, 1rem)",
-            }}
-          >
-            Still dealing with cracked concrete, wasted outdoor space, and
-            constant upkeep? We build beautiful custom hardscapes designed for
-            Colorado living and built to last.
-          </p>
-        </div>
-        <AccentPill>Before → After</AccentPill>
-      </div>
-
-      {/* Interactive before / after compare slider */}
+      {/* Interactive before / after compare slider — title rendered inside */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -496,6 +526,7 @@ const BeforeAfterBlock = ({ beforeImage, afterImage, index }) => {
         transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
       >
         <BeforeAfterCompareSlider
+          title={title}
           beforeImage={{
             src: beforeImage.src,
             alt: beforeImage.alt ?? "Before: traditional grass lawn",
@@ -506,30 +537,6 @@ const BeforeAfterBlock = ({ beforeImage, afterImage, index }) => {
           }}
         />
       </motion.div>
-
-      {/* Captions below slider */}
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
-        <p
-          className="font-satoshi font-semibold text-sm leading-snug"
-          style={{ color: "rgba(244,222,191,0.6)" }}
-        >
-          <span className="text-[#F4DEBF]/45 uppercase text-xs tracking-widest font-bold mr-2">
-            Before
-          </span>
-          Plain lawn, empty space, muddy walkways, and an outdoor area that goes
-          unused.
-        </p>
-        <p
-          className="font-satoshi font-semibold text-sm leading-snug sm:text-right"
-          style={{ color: "rgba(244,222,191,0.75)" }}
-        >
-          <span className="text-[#E86240] uppercase text-xs tracking-widest font-bold mr-2">
-            After
-          </span>
-          Beautiful custom hardscaping with patios, walkways, and outdoor spaces
-          built for Colorado living.
-        </p>
-      </div>
     </motion.div>
   );
 };
@@ -780,40 +787,39 @@ export default function ServicesSection({
 
   const heroService = {
     number: "01",
-    title: "Custom Hardscape Design",
-    body: "We design functional, high end outdoor spaces that add beauty, structure, and lasting value to your home",
+    title: "Custom Xeriscape Design",
+    body: "We create low-water landscape designs built specifically for your property, style, and Colorado climate.",
     accent: "Design + Planning",
-    image: img("design", "Custom Hardscape Design"),
+    image: img("design", "Custom Xeriscape Design"),
   };
-
   const standardServices = [
     {
       number: "03",
+      title: "Paver Patios & Outdoor Living Spaces",
+      body: "Transform plain lawns into beautiful outdoor living spaces with durable pavers designed to last for years",
+      accent: "Finishing Touch",
+      image: img("walkway", "Walkway and Outdoor Features"),
+    },
+    {
+      number: "04",
       title: "Retaining Walls & Structural Stonework",
       body: "Prevent erosion, improve structure, and add clean stonework that holds up through Colorado’s harsh seasons",
       accent: "Permanent Beauty",
       image: img("rockGravel", "Decorative Rock and Gravel"),
     },
     {
-      number: "04",
+      number: "05",
       title: "Fire Pits & Seating Areas",
       body: "Create a warm, inviting space for relaxing, entertaining, and enjoying your backyard year round.",
       accent: "Native + Thriving",
       image: img("plants", "Drought Resistant Native Plants"),
     },
     {
-      number: "05",
+      number: "06",
       title: "Outdoor Kitchens & Gathering Spaces",
       body: "Upgrade unused outdoor space into a functional area built for cooking, hosting, and gathering outdoors",
       accent: "Water Smart",
       image: img("irrigation", "Smart Drip Irrigation System"),
-    },
-    {
-      number: "06",
-      title: "Paver Patios & Outdoor Living Spaces",
-      body: "Transform plain lawns into beautiful outdoor living spaces with durable pavers designed to last for years",
-      accent: "Finishing Touch",
-      image: img("walkway", "Walkway and Outdoor Features"),
     },
     {
       number: "07",
@@ -830,7 +836,6 @@ export default function ServicesSection({
       image: img("border", "Walkway and Outdoor Features"),
     },
   ];
-
   return (
     <section
       className="relative w-full overflow-hidden"
@@ -863,7 +868,7 @@ export default function ServicesSection({
               delay: 0.1,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="font-sans font-black text-center leading-[1.05] mb-7"
+            className="font-sans font-black text-center leading-[1.05] mb-6"
             style={{
               color: "#F4DEBF",
               fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
@@ -871,7 +876,7 @@ export default function ServicesSection({
             }}
           >
             What's Included In A{" "}
-            <span className="text-orange">Hardscaping</span> Project?
+            <span style={{ color: "#E86240" }}>Hardscaping</span> Project?
           </motion.h2>
 
           <motion.div
@@ -889,6 +894,11 @@ export default function ServicesSection({
               }}
             />
           </motion.div>
+          <p className="text-center text-sand font-sans max-w-3xl mx-auto font-normal">
+            Hardscaping is a smarter way to upgrade your outdoor space with
+            long-lasting features that improve curb appeal, functionality, and
+            how you actually enjoy your yard year-round.
+          </p>
         </div>
 
         {/* ── BLOCK 1: Hero service — full width ─────────────────────────────── */}
@@ -898,10 +908,19 @@ export default function ServicesSection({
           </div>
         </div>
 
-        {/* ── BLOCK 2: Before / After — full width ────────────────────────────── */}
-        <div className="mb-6 lg:mb-7">
+        {/* ── BLOCK 2: Before / After sliders ────────────────────────────────── */}
+        <div className="mb-6 lg:mb-7 flex flex-col gap-6">
+          <div>
+            <BeforeAfterBlock
+              title="Walkways to Stunning Paver Patios"
+              beforeImage={img("beforeTurf", "Before — Bare Desert Rock")}
+              afterImage={img("afterTurf", "After — Lush Xeriscape Design")}
+              index={2}
+            />
+          </div>
           <div className="mt-5">
             <BeforeAfterBlock
+              title="Lawn to Hardscape Conversion"
               beforeImage={img("beforeLawn", "Before — Traditional Grass Lawn")}
               afterImage={img("afterXeri", "After — Xeriscape Conversion")}
               index={1}
@@ -944,9 +963,9 @@ export default function ServicesSection({
           />
           <div className="flex flex-wrap justify-center gap-10 lg:gap-20">
             {[
-              { value: "Built for ", label: "Colorado Weather" },
-              { value: "Low Maintenance", label: "Outdoor Living" },
-              { value: "Year-Round", label: "Curb Appeal" },
+              { value: "Up to 15+ Years", label: "Built to Last" },
+              { value: "100% Custom", label: "Colorado Native Focus" },
+              { value: "Year-Round", label: "Beauty & Functionality" },
             ].map(({ value, label }, i) => (
               <motion.div
                 key={i}

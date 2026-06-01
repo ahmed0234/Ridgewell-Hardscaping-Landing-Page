@@ -8,10 +8,12 @@ import TrustBar from "@/components/Trustbar";
 import ReviewsSection from "@/components/Review";
 import RidgewellFAQCTA from "@/components/Faq";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const page = () => {
   return (
     <div>
+      <Navbar />
       <HeroSection />
       <ServicesSection />
       <TransformationSection />

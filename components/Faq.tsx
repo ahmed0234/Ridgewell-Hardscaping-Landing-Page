@@ -21,31 +21,37 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     id: 1,
+    question: "What Is Hardscaping?",
+    answer:
+      "Hardscaping refers to the permanent features of your outdoor space such as patios, retaining walls, pavers, walkways, fire pits, outdoor kitchens, and other stone or concrete elements. Unlike traditional landscaping, hardscaping focuses on durable structures that improve functionality, curb appeal, and long-term value while requiring less maintenance.",
+  },
+  {
+    id: 2,
     question: "How much does a custom hardscape cost in Denver?",
     answer:
       "Every project is different patio size, paver selection, retaining walls, fire features, and site conditions all affect investment. That's why we start with a free consultation and custom design, so you know exactly what your outdoor transformation involves before we break ground. No surprises, no guesswork.",
   },
   {
-    id: 2,
+    id: 3,
     question:
       "Will pavers and stonework survive Colorado winters without cracking?",
     answer:
       "Yes when they're built the right way. Cheap installs fail after one freeze thaw cycle. Ridgewell uses engineered base work, proper drainage, and premium materials designed for Colorado's harsh seasons. That's how our patios, walkways, and retaining walls resist shifting, cracking, and the constant repairs homeowners are tired of paying for.",
   },
   {
-    id: 3,
+    id: 4,
     question: "Can you fix drainage issues and replace cracked concrete?",
     answer:
       "Absolutely it's one of the most common reasons homeowners call us. Pooling water, muddy walkways, and failing slabs don't just look bad they make outdoor space unusable. We design hardscapes that move water properly while transforming cracked concrete and wasted yard space into functional patios, stonework, and outdoor living areas you'll actually enjoy.",
   },
   {
-    id: 4,
+    id: 5,
     question: "How long does a hardscaping project take?",
     answer:
       "Most patio, walkway, and retaining wall projects are completed within 1–2 weeks depending on scope and complexity. We work efficiently without cutting corners and you'll know your timeline upfront during the design consultation, so you're never left wondering when your backyard will finally feel finished.",
   },
   {
-    id: 5,
+    id: 6,
     question: "Do you build full outdoor living spaces not just basic patios?",
     answer:
       "Yes. Ridgewell specializes in complete outdoor transformations: paver patios, retaining walls, fire pits, built-in seating, premium stonework, and cohesive layouts designed around how you live outside. Whether you're fixing an outdated backyard or building a full entertainment space, we handle design through final walkthrough.",

@@ -14,6 +14,9 @@ import {
   PiSunLight,
   PiPlantLight,
   PiShieldCheckLight,
+  PiMedalLight,
+  PiStarLight,
+  PiMountainsLight,
 } from "react-icons/pi";
 import ConsultationForm from "./ConsultationForm";
 import { useIsLg } from "@/hooks/useIsLg";
@@ -329,8 +332,8 @@ export default function HeroSection() {
             }}
             className="font-poppins font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Beautiful {" "}
-            <span style={{ color: C.terra }}>Hardscaping</span> For Colorado Homes That Actually Last
+            Beautiful <span style={{ color: C.terra }}>Hardscaping</span> For
+            Colorado Homes That Actually Last
           </motion.h1>
 
           {/* Sub 1 */}
@@ -344,9 +347,11 @@ export default function HeroSection() {
               marginBottom: "1rem",
               maxWidth: "48ch",
             }}
-            className="font-sans font-bold text-lg lg:text-2xl"
+            className="font-jakarta font-bold text-lg lg:text-2xl leading-relaxed"
           >
-            No cracked patios, uneven walkways, or outdoor spaces that fall apart after one harsh winter
+            Custom patios, retaining walls, paver installation, and outdoor
+            living spaces designed to upgrade your yard, reduce maintenance, and
+            add lasting curb appeal.
           </motion.p>
 
           {/* Sub 2 */}
@@ -362,7 +367,10 @@ export default function HeroSection() {
             }}
             className="font-satoshi font-bold italic text-lg lg:text-2xl leading-tight"
           >
-            Ridgewell Landscape & Design builds custom hardscapes designed for Colorado weather, low maintenance, and long term durability
+            Ridgewell Landscape & Design builds durable, beautiful outdoor
+            spaces for Colorado homes, including patios, retaining walls,
+            walkways, fire pits, outdoor kitchens, and premium outdoor living
+            areas.
           </motion.p>
 
           {/* CTA Row */}
@@ -633,21 +641,21 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 1.1 }}
           >
             <FeatureItem
-              icon={PiDropLight}
-              title="Built to Last"
-              body="Designed to handle Colorado weather for years."
+              icon={PiMedalLight}
+              title="15+ Years of Experience"
+              body="Proven craftsmanship and expert landscape design across Colorado."
               delay={1.25}
             />
             <FeatureItem
-              icon={PiSunLight}
-              title="Functional Outdoor Living"
-              body="Patios and spaces built for everyday living."
+              icon={PiStarLight}
+              title="5 Star Rated Local Company"
+              body="Highly rated by your neighbors in Denver and the Front Range."
               delay={1.35}
             />
             <FeatureItem
-              icon={PiShieldCheckLight}
-              title="Low Maintenance"
-              body="A cleaner outdoor space with less upkeep."
+              icon={PiMountainsLight}
+              title="Built For Colorado’s Climate"
+              body="Drought-resilient xeriscaping designed to thrive year-round."
               delay={1.45}
             />
           </motion.div>

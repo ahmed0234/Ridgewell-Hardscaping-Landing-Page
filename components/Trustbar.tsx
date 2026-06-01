@@ -41,9 +41,9 @@ const TRUST_ITEMS = [
   {
     id: "04",
     icon: FaMapMarkerAlt,
-    label: "Denver & Beyond",
-    sub: "Front Range outdoor living specialists",
-    pill: "50-mi radius",
+    label: "Trust & Reach",
+    sub: "Trusted Across Colorado, Homeowners choose us for quality craftsmanship",
+    pill: "Front Range Service",
   },
   {
     id: "05",
@@ -374,7 +374,7 @@ export default function TrustBar() {
             <span className="relative inline-flex rounded-full h-2 w-2 lg:h-3 lg:w-3 bg-[#E86240]" />
           </span>
           <span className="text-[10.5px] lg:text-[13px] font-bold tracking-[0.16em] lg:tracking-[0.2em] uppercase text-[#F4DEBF]/60">
-            Now booking outdoor living projects — Denver &amp; Front Range
+            Now booking outdoor living projects Denver &amp; Front Range
           </span>
         </motion.div>
       </div>
