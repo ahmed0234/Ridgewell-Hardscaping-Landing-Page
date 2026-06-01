@@ -787,7 +787,7 @@ export default function ServicesSection({
 
   const heroService = {
     number: "01",
-    title: "Custom Xeriscape Design",
+    title: "Custom Hardscape Design",
     body: "We create low-water landscape designs built specifically for your property, style, and Colorado climate.",
     accent: "Design + Planning",
     image: img("design", "Custom Xeriscape Design"),
