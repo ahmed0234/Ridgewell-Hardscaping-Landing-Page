@@ -181,7 +181,7 @@ const HeroServiceBlock = ({ service, index }) => {
             className="font-sans font-black leading-tight"
             style={{
               color: "#F4DEBF",
-              fontSize: "clamp(1.85rem, 3.8vw, 2.8rem)",
+              fontSize: "clamp(1.85rem, 3.8vw, 2.5rem)",
               letterSpacing: "-0.025em",
               textShadow: "0 2px 24px rgba(0,0,0,0.5)",
             }}
