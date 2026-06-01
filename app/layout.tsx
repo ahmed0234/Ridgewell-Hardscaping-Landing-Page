@@ -7,6 +7,7 @@ import {
   Outfit,
 } from "next/font/google";
 import "./globals.css";
+import FloatingCallCTA from "@/components/FloatingCta";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <main>
           {children}
+          <FloatingCallCTA />
         </main>
       </body>
     </html>

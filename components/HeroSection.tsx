@@ -643,19 +643,19 @@ export default function HeroSection() {
             <FeatureItem
               icon={PiMedalLight}
               title="15+ Years of Experience"
-              body="Proven craftsmanship and expert landscape design across Colorado."
+              body="Building exceptional patios, walkways, and retaining walls throughout Colorado"
               delay={1.25}
             />
             <FeatureItem
               icon={PiStarLight}
               title="5 Star Rated Local Company"
-              body="Highly rated by your neighbors in Denver and the Front Range."
+              body="Highly rated by your neighbors in Denver and the Front Range"
               delay={1.35}
             />
             <FeatureItem
               icon={PiMountainsLight}
               title="Built For Colorado’s Climate"
-              body="Drought-resilient xeriscaping designed to thrive year-round."
+              body="Premium patios, walkways, and stonework built to withstand Colorado's climate"
               delay={1.45}
             />
           </motion.div>

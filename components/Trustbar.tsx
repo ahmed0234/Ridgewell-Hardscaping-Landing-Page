@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { FaStar, FaMapMarkerAlt, FaShieldAlt, FaAward } from "react-icons/fa";
+import { FaStar, FaMapMarkerAlt, FaShieldAlt, FaAward, FaThLarge } from "react-icons/fa";
 import { GiBrickWall, GiFireBowl, GiMountains } from "react-icons/gi";
 import { HiSparkles } from "react-icons/hi2";
 
@@ -40,10 +40,10 @@ const TRUST_ITEMS = [
   },
   {
     id: "04",
-    icon: FaMapMarkerAlt,
-    label: "Trust & Reach",
-    sub: "Trusted Across Colorado, Homeowners choose us for quality craftsmanship",
-    pill: "Front Range Service",
+    icon: FaThLarge,
+    label: "Custom Paver Patios",
+    sub: "Expertly designed and installed paver patios to elevate your outdoor living space.",
+    pill: "Premium Materials",
   },
   {
     id: "05",
