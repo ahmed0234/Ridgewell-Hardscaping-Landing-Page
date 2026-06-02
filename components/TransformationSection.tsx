@@ -277,7 +277,7 @@ export default function TransformationSection() {
 
             {/* CTA button */}
             <motion.a
-              href="#quote"
+              href="#consultation"
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
               className="group relative inline-flex items-center justify-center gap-3 px-10 py-4.5 rounded-full text-sm font-semibold tracking-wide text-white overflow-hidden shadow-2xl shadow-[#E86240]/25"
