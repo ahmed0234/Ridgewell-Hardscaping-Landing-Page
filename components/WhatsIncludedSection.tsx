@@ -28,6 +28,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { motion, useInView } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import DesertHorizonEdge from "./Deserthorizon";
+import ServiceCarousel from "./ServiceCarousel";
 
 /** Default service images — paths match public/services filenames exactly */
 const DEFAULT_IMAGES = {
@@ -787,23 +788,23 @@ export default function ServicesSection({
 
   const heroService = {
     number: "01",
-    title: "Custom Hardscape Design",
-    body: "From patios to retaining walls, we craft custom hardscapes built around your property and vision.",
+    title: "Custom Landscape Design",
+    body: "Outdoor spaces thoughtfully designed around your home, style, and how you actually want to use your yard",
     accent: "Design + Planning",
     image: img("design", "Custom Xeriscape Design"),
   };
   const standardServices = [
     {
       number: "03",
-      title: "Paver Patios & Outdoor Living Spaces",
-      body: "Transform plain lawns into beautiful outdoor living spaces with durable pavers designed to last for years",
+      title: "Paver Patios & Outdoor Living",
+      body: "Beautiful patios designed for relaxing, entertaining, fire pits, and outdoor gatherings",
       accent: "Finishing Touch",
       image: img("walkway", "Walkway and Outdoor Features"),
     },
     {
       number: "04",
-      title: "Retaining Walls & Structural Stonework",
-      body: "Prevent erosion, improve structure, and add clean stonework that holds up through Colorado’s harsh seasons",
+      title: "Retaining Walls",
+      body: "Strong retaining walls built to improve drainage, solve sloping issues, and enhance curb appeal",
       accent: "Permanent Beauty",
       image: img("rockGravel", "Decorative Rock and Gravel"),
     },
@@ -816,8 +817,8 @@ export default function ServicesSection({
     },
     {
       number: "06",
-      title: "Outdoor Kitchens & Gathering Spaces",
-      body: "Upgrade unused outdoor space into a functional area built for cooking, hosting, and gathering outdoors",
+      title: "Outdoor Kitchens & Backyard Features",
+      body: "Custom outdoor kitchens, seating areas, walkways, and premium backyard upgrades built for Colorado living",
       accent: "Water Smart",
       image: img("irrigation", "Smart Drip Irrigation System"),
     },
@@ -857,9 +858,9 @@ export default function ServicesSection({
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-28 lg:py-12">
+      <div className="relative z-10 w-full max-w-fit mx-auto px-6 sm:px-10 lg:px-16 py-12 lg:py-12">
         {/* ── Header ─────────────────────────────────────────────────────────── */}
-        <div ref={headerRef} className="mb-20 lg:mb-12">
+        <div ref={headerRef} className="mb-12 lg:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
@@ -875,8 +876,7 @@ export default function ServicesSection({
               letterSpacing: "-0.028em",
             }}
           >
-            What's Included In A{" "}
-            <span style={{ color: "#E86240" }}>Hardscaping</span> Project?
+            Our <span style={{ color: "#E86240" }}>Services</span>
           </motion.h2>
 
           <motion.div
@@ -887,29 +887,29 @@ export default function ServicesSection({
             style={{ transformOrigin: "center" }}
           >
             <div
-              className="h-px w-20"
+              className="h-px w-32"
               style={{
                 background:
                   "linear-gradient(90deg, transparent, #E86240, transparent)",
               }}
             />
           </motion.div>
-          <p className="text-center text-sand font-sans max-w-3xl mx-auto font-normal">
-            Hardscaping is a smarter way to upgrade your outdoor space with
-            long-lasting features that improve curb appeal, functionality, and
-            how you actually enjoy your yard year-round.
+          <p className="text-center text-sand font-sans max-w-3xl mx-auto font-semibold">
+            Every home is different. That’s why we design outdoor spaces around
+            how you want to live, entertain, and enjoy your property while
+            making sure it’s built to thrive in Colorado’s climate.
           </p>
         </div>
 
         {/* ── BLOCK 1: Hero service — full width ─────────────────────────────── */}
-        <div className="mb-6 lg:mb-7">
+        {/* <div className="mb-6 lg:mb-7">
           <div className="mt-5">
             <HeroServiceBlock service={heroService} index={0} />
           </div>
-        </div>
+        </div> */}
 
         {/* ── BLOCK 2: Before / After sliders ────────────────────────────────── */}
-        <div className="mb-6 lg:mb-7 flex flex-col gap-6">
+        {/* <div className="mb-6 lg:mb-7 flex flex-col gap-6">
           <div>
             <BeforeAfterBlock
               title="Walkways to Stunning Paver Patios"
@@ -926,15 +926,11 @@ export default function ServicesSection({
               index={1}
             />
           </div>
-        </div>
+        </div> */}
 
-        {/* ── BLOCK 3: Two standard cards side by side ────────────────────────── */}
-        <div className="mb-6 lg:mb-7">
-          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
-            {standardServices.map((s, i) => (
-              <StandardServiceCard key={s.number} service={s} index={i + 2} />
-            ))}
-          </div>
+        {/* ── BLOCK 3: Service cards carousel ─────────────────────────────────── */}
+        <div className="mb-6 lg:mb-7 mt-5">
+          <ServiceCarousel services={standardServices} />
         </div>
 
         {/* ── BLOCK 4: Two wide landscape cards stacked ───────────────────────── */}

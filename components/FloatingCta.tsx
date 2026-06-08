@@ -65,6 +65,63 @@ function LeafSprout() {
   );
 }
 
+// ─── Consultation Badge ────────────────────────────────────────────────────────
+function ConsultationBadge() {
+  const [hovered, setHovered] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target = document.getElementById("consultation");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <motion.a
+      href="#consultation"
+      onClick={handleClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      className="absolute bottom-[calc(100%-18px)] left-1/2 -translate-x-1/2 flex items-end justify-center cursor-pointer focus-visible:outline-none z-0"
+    >
+      <div
+        className="relative flex items-center gap-2 px-4 pt-2.5 pb-6 overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${TERRA} 0%, #B84220 100%)`,
+          borderRadius: "12px 12px 0 0",
+          boxShadow:
+            "0 -6px 16px rgba(232,98,64,0.35), inset 0 1px 1px rgba(255,255,255,0.4)",
+          border: "1px solid rgba(255,255,255,0.15)",
+          borderBottom: "none",
+        }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: hovered ? 0.15 : 0 }}
+        />
+        <div className="relative flex items-center justify-center w-2 h-2">
+          {hovered && (
+            <span className="absolute inline-flex h-4 w-4 rounded-full bg-white opacity-40 animate-ping" />
+          )}
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+        </div>
+        <span
+          className="font-sans font-black text-[12px] tracking-widest uppercase text-white"
+          style={{ textShadow: "0 1px 2px rgba(0,0,0,0.25)" }}
+        >
+          Get an Estimate
+        </span>
+      </div>
+    </motion.a>
+  );
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function FloatingCallCTA() {
   const [visible, setVisible] = useState(false);
@@ -128,21 +185,24 @@ export default function FloatingCallCTA() {
             style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
+            className="flex flex-col items-end"
           >
-            <LeafSprout />
+            <div className="relative">
+              <ConsultationBadge />
+              <LeafSprout />
 
-            {/* ── Pill ── */}
-            <motion.a
-              href={PHONE_HREF}
-              aria-label={`Call Us Now — Ridgewell Landscape & Design at ${PHONE_DISPLAY}`}
-              onMouseEnter={() => setExpanded(true)}
-              onMouseDown={() => setPressed(true)}
-              onMouseUp={() => setPressed(false)}
-              onTouchStart={() => setPressed(true)}
-              onTouchEnd={() => setPressed(false)}
-              animate={{ scale: pressed ? 0.95 : 1 }}
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              className="relative flex items-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E86240]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#461E2D] font-sans font-bold"
+              {/* ── Pill ── */}
+              <motion.a
+                href={PHONE_HREF}
+                aria-label={`Call Us Now — Ridgewell Landscape & Design at ${PHONE_DISPLAY}`}
+                onMouseEnter={() => setExpanded(true)}
+                onMouseDown={() => setPressed(true)}
+                onMouseUp={() => setPressed(false)}
+                onTouchStart={() => setPressed(true)}
+                onTouchEnd={() => setPressed(false)}
+                animate={{ scale: pressed ? 0.95 : 1 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                className="relative z-10 flex items-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E86240]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#461E2D] font-sans font-bold"
               style={{
                 borderRadius: 999,
                 minHeight: 60,
@@ -279,6 +339,7 @@ export default function FloatingCallCTA() {
                 transition: "width 0.45s cubic-bezier(0.22,1,0.36,1)",
               }}
             />
+            </div>
           </motion.div>
 
           {/* ── Trust nudge beneath pill ── */}

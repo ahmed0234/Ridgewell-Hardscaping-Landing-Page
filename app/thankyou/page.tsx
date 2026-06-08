@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import GoogleAdsConversion from "@/components/GoogleAdsConversion";
 import {
   PiCheckCircleFill,
   PiClipboardTextBold,
@@ -184,6 +185,7 @@ export default function ThankYouPage() {
       className="relative w-full h-screen overflow-hidden flex items-center justify-center px-4 sm:px-6"
       style={{ background: DEEP }}
     >
+      <GoogleAdsConversion />
       {/* ── Atmosphere ── */}
       <div
         aria-hidden

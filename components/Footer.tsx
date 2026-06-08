@@ -247,7 +247,7 @@ export default function Footer() {
                 }}
               >
                 <Image
-                  src="/Nav.png"
+                  src="/NavLogo.webp"
                   alt="Ridgewell Landscaping logo"
                   width={100}
                   height={100}

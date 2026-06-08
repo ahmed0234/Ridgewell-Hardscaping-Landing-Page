@@ -21,15 +21,15 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     id: 1,
-    question: "What Is Hardscaping?",
+    question: "What Landscaping Services Do You Offer?",
     answer:
-      "Hardscaping refers to the permanent features of your outdoor space such as patios, retaining walls, pavers, walkways, fire pits, outdoor kitchens, and other stone or concrete elements. Unlike traditional landscaping, hardscaping focuses on durable structures that improve functionality, curb appeal, and long-term value while requiring less maintenance.",
+      "We provide custom landscaping and outdoor living services including landscape design, hardscaping, paver patios, retaining walls, xeriscaping, decorative stone, outdoor kitchens, and complete backyard transformations throughout Denver and surrounding areas",
   },
   {
     id: 2,
-    question: "How much does a custom hardscape cost in Denver?",
+    question: "Do You Only Do Large Landscaping Projects?",
     answer:
-      "Every project is different patio size, paver selection, retaining walls, fire features, and site conditions all affect investment. That's why we start with a free consultation and custom design, so you know exactly what your outdoor transformation involves before we break ground. No surprises, no guesswork.",
+      "No. Whether you need a patio, retaining wall, xeriscaping upgrade, or a full backyard transformation, we design projects around your goals, property, and budget",
   },
   {
     id: 3,
@@ -40,21 +40,21 @@ const faqs: FAQItem[] = [
   },
   {
     id: 4,
-    question: "Can you fix drainage issues and replace cracked concrete?",
+    question: "Do You Design Landscapes For Colorado Weather?",
     answer:
-      "Absolutely it's one of the most common reasons homeowners call us. Pooling water, muddy walkways, and failing slabs don't just look bad they make outdoor space unusable. We design hardscapes that move water properly while transforming cracked concrete and wasted yard space into functional patios, stonework, and outdoor living areas you'll actually enjoy.",
+      "Yes. Every project is designed with Colorado’s climate in mind using materials, layouts, drainage, plants, and outdoor features built to last through changing seasons",
   },
   {
     id: 5,
-    question: "How long does a hardscaping project take?",
+    question: "How long does a Landscaping project take?",
     answer:
       "Most patio, walkway, and retaining wall projects are completed within 1–2 weeks depending on scope and complexity. We work efficiently without cutting corners and you'll know your timeline upfront during the design consultation, so you're never left wondering when your backyard will finally feel finished.",
   },
   {
     id: 6,
-    question: "Do you build full outdoor living spaces not just basic patios?",
+    question: "Can You Help Create A Low Maintenance Yard?",
     answer:
-      "Yes. Ridgewell specializes in complete outdoor transformations: paver patios, retaining walls, fire pits, built-in seating, premium stonework, and cohesive layouts designed around how you live outside. Whether you're fixing an outdated backyard or building a full entertainment space, we handle design through final walkthrough.",
+      "Absolutely. Many homeowners want a beautiful yard without constant upkeep. We specialize in low-maintenance landscaping, xeriscaping, decorative stone, and outdoor designs that reduce watering and maintenance while still looking great",
   },
 ];
 
@@ -367,8 +367,7 @@ function CTASection() {
       <motion.div
         className="absolute inset-[-10%] bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('/home-design.png')",
+          backgroundImage: "url('/home-design.png')",
           y: bgY,
           filter: "saturate(0.75)",
         }}

@@ -2,7 +2,13 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { FaStar, FaMapMarkerAlt, FaShieldAlt, FaAward, FaThLarge } from "react-icons/fa";
+import {
+  FaStar,
+  FaMapMarkerAlt,
+  FaShieldAlt,
+  FaAward,
+  FaThLarge,
+} from "react-icons/fa";
 import { GiBrickWall, GiFireBowl, GiMountains } from "react-icons/gi";
 import { HiSparkles } from "react-icons/hi2";
 
@@ -255,6 +261,7 @@ export default function TrustBar() {
       aria-label="Why choose Ridgewell for premium hardscaping"
       className="relative w-full overflow-hidden"
       style={{ background: "#2a1018" }}
+      id="TrustBar"
     >
       {/* radial glow */}
       <div

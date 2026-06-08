@@ -9,6 +9,79 @@ const PHONE_DISPLAY = "720-882-5772";
 const PHONE_HREF = "tel:+17208825772";
 
 /* ─────────────────────────────────────────────────────────
+   ESTIMATE BUTTON
+───────────────────────────────────────────────────────── */
+function EstimateButton() {
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target = document.getElementById("consultation");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <motion.a
+      href="#consultation"
+      onClick={handleClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+      aria-label="Get an Estimate"
+      className="group relative overflow-hidden rounded-xl font-sans sm:rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 outline-none focus-visible:ring-2 focus-visible:ring-[#F4DEBF]/75 flex-shrink-0 inline-flex items-center justify-center cursor-pointer transition-colors"
+      animate={{
+        scale: pressed ? 0.96 : hovered ? 1.03 : 1,
+        y: pressed ? 1 : hovered ? -2 : 0,
+      }}
+      transition={{ type: "spring", stiffness: 400, damping: 26 }}
+    >
+      {/* Soft pulse effect */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-xl sm:rounded-2xl border border-[#F4DEBF]"
+        initial={{ opacity: 0.25, scale: 1 }}
+        animate={{ opacity: 0, scale: 1.15 }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+      />
+
+      {/* Base Glass Background */}
+      <span
+        className="pointer-events-none absolute inset-0 rounded-xl sm:rounded-2xl transition-all duration-300"
+        style={{
+          background: hovered
+            ? "color-mix(in srgb, #F4DEBF 10%, transparent)"
+            : "color-mix(in srgb, #F4DEBF 4%, transparent)",
+          boxShadow: hovered
+            ? "inset 0 1px 1px color-mix(in srgb, #F4DEBF 20%, transparent), 0 4px 12px color-mix(in srgb, #461E2D 40%, transparent)"
+            : "none",
+          border: hovered
+            ? "1px solid color-mix(in srgb, #F4DEBF 25%, transparent)"
+            : "1px solid color-mix(in srgb, #F4DEBF 12%, transparent)",
+        }}
+      />
+
+      {/* Label */}
+      <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 h-7 sm:h-8">
+        <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E86240] opacity-80" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-[#E86240]" />
+        </span>
+        <span
+          className="font-sans font-bold text-[9px] sm:text-[11px] md:text-[12px] uppercase tracking-widest whitespace-nowrap transition-colors duration-300 flex items-center"
+          style={{ color: hovered ? "#FFF" : "#F4DEBF" }}
+        >
+          Get an Estimate
+        </span>
+      </span>
+    </motion.a>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────
    CONTACT BUTTON
 ───────────────────────────────────────────────────────── */
 function ContactButton() {
@@ -140,11 +213,11 @@ function BrandMark() {
           transition={{ duration: 0.35 }}
         />
         <Image
-          src="/Nav.png"
+          src="/NavLogo.webp"
           alt="Ridgewell logo"
           width={100}
           height={100}
-          className="object-contain "
+          className="object-contain"
           priority
         />
       </motion.div>
@@ -283,9 +356,9 @@ export default function Navbar() {
             <BrandMark />
           </motion.div>
 
-          {/* RIGHT — Contact */}
+          {/* RIGHT — Contact & CTA */}
           <motion.div
-            className="flex-shrink-0"
+            className="flex-shrink-0 flex items-center gap-2 sm:gap-3 md:gap-4"
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -294,6 +367,7 @@ export default function Navbar() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
+            <EstimateButton />
             <ContactButton />
           </motion.div>
         </motion.nav>

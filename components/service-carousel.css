@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ServiceCarousel — premium slider styles
+   Follows existing design tokens: #F4DEBF (sand), #E86240 (orange),
+   #461E2D/#4C2733 (dark), rgba variants throughout.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Container ─────────────────────────────────────────────────────────────── */
+
+.service-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Navigation bar ────────────────────────────────────────────────────────── */
+
+.service-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding: 0 0.125rem;
+}
+
+/* Counter: 01 / 06 */
+.service-carousel-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  user-select: none;
+}
+
+.service-carousel-counter-current {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #f4debf;
+  letter-spacing: -0.02em;
+}
+
+.service-carousel-counter-sep {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(244, 222, 191, 0.25);
+}
+
+.service-carousel-counter-total {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(244, 222, 191, 0.35);
+}
+
+/* Arrow buttons */
+.service-carousel-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-carousel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 222, 191, 0.12);
+  background: rgba(76, 39, 51, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #f4debf;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+  outline: none;
+}
+
+.service-carousel-arrow:hover:not(:disabled) {
+  background: rgba(232, 98, 64, 0.18);
+  border-color: rgba(232, 98, 64, 0.4);
+  transform: scale(1.06);
+  box-shadow: 0 4px 20px rgba(232, 98, 64, 0.15);
+}
+
+.service-carousel-arrow:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.service-carousel-arrow:focus-visible {
+  outline: 2px solid #e86240;
+  outline-offset: 2px;
+}
+
+.service-carousel-arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Swiper overrides ──────────────────────────────────────────────────────── */
+
+.service-carousel-swiper {
+  overflow: visible !important;
+  padding-bottom: 0.25rem;
+}
+
+.service-carousel-swiper .swiper-wrapper {
+  /* Smooth transitions via CSS, complementing Swiper's JS */
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.service-carousel-slide {
+  height: auto;
+}
+
+/* ── Slide card ────────────────────────────────────────────────────────────── */
+
+.service-slide-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  height: clamp(340px, 44vw, 480px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(244, 222, 191, 0.06);
+  cursor: grab;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .service-slide-card:hover {
+    border-color: rgba(232, 98, 64, 0.2);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(232, 98, 64, 0.08);
+    transform: translateY(-4px);
+  }
+}
+
+.service-slide-card:active {
+  cursor: grabbing;
+}
+
+/* ── Pagination ────────────────────────────────────────────────────────────── */
+
+.service-carousel-pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.service-carousel-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.service-carousel-bullet {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(244, 222, 191, 0.2);
+  transition:
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s ease,
+    opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  opacity: 0.7;
+}
+
+.service-carousel-bullet:hover {
+  background: rgba(244, 222, 191, 0.4);
+  opacity: 1;
+}
+
+.service-carousel-bullet-active {
+  width: 28px;
+  background: linear-gradient(90deg, #e86240, #d94f2b);
+  opacity: 1;
+}
+
+/* ── Responsive tweaks ─────────────────────────────────────────────────────── */
+
+@media (max-width: 639px) {
+  .service-slide-card {
+    height: clamp(300px, 70vw, 380px);
+  }
+
+  .service-carousel-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .service-carousel-pagination-wrapper {
+    margin-top: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-carousel-nav {
+    margin-bottom: 1.5rem;
+  }
+
+  .service-carousel-arrow {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .service-slide-card {
+    transition: none;
+  }
+
+  .service-carousel-arrow {
+    transition: none;
+  }
+
+  .service-carousel-bullet {
+    transition: none;
+  }
+
+  .service-carousel-swiper .swiper-wrapper {
+    transition-timing-function: ease !important;
+  }
+}

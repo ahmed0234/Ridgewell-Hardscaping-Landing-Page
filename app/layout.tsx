@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import FloatingCallCTA from "@/components/FloatingCta";
+import OpeningAnimation from "@/components/OpeningAnimation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,12 +39,14 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/Nav.png",
+    icon: "/NavLogo.webp",
   },
-  title: "Ridgewell Hardscaping",
+  title: "Ridgewell Landscaping & Design",
   description:
     "Premium hardscaping solutions for your home. From patios and walkways to retaining walls and outdoor living spaces, we create beautiful, durable landscapes that enhance your property.",
 };
+
+import GoogleAdsTracking from "@/components/GoogleAdsTracking";
 
 export default function RootLayout({
   children,
@@ -56,6 +59,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${plusJakartaSans.variable}  ${poppins.variable}  ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <OpeningAnimation />
+        <GoogleAdsTracking />
         <main>
           {children}
           <FloatingCallCTA />

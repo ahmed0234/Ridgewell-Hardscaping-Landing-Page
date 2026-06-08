@@ -311,10 +311,10 @@ export default function HeroSection() {
           >
             <PiLeafLight size={14} style={{ color: C.terra }} />
             <span
-              className="text-[11.5px] 2xl:text-sm font-bold tracking-widest uppercase font-satoshi"
+              className="text-[11.5px] 2xl:text-sm font-bold tracking-widest uppercase font-poppins text-center"
               style={{ color: C.deepPlum }}
             >
-              Colorado's Premier Hardscaping Company
+              Colorado's Premier Landscaping Company
             </span>
           </motion.div>
 
@@ -330,10 +330,10 @@ export default function HeroSection() {
               marginBottom: "1.1rem",
               maxWidth: "850px",
             }}
-            className="font-poppins font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+            className="font-poppins font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Beautiful <span style={{ color: C.terra }}>Hardscaping</span> For
-            Colorado Homes That Actually Last
+            Beautiful <span style={{ color: C.terra }}>Landscaping </span> In
+            Denver Built Around Your Home
           </motion.h1>
 
           {/* Sub 1 */}
@@ -347,11 +347,11 @@ export default function HeroSection() {
               marginBottom: "1rem",
               maxWidth: "48ch",
             }}
-            className="font-jakarta font-bold text-lg lg:text-2xl leading-relaxed"
+            className="font-sans font-bold text-base lg:text-2xl leading-relaxed"
           >
-            Custom patios, retaining walls, paver installation, and outdoor
-            living spaces designed to upgrade your yard, reduce maintenance, and
-            add lasting curb appeal.
+            Custom landscaping, hardscaping, patios, retaining walls,
+            xeriscaping, and outdoor living spaces designed to make your yard
+            more beautiful, functional, and easier to enjoy year round.
           </motion.p>
 
           {/* Sub 2 */}
@@ -365,12 +365,12 @@ export default function HeroSection() {
               marginBottom: "1rem",
               maxWidth: "48ch",
             }}
-            className="font-satoshi font-bold italic text-lg lg:text-2xl leading-tight"
+            className="font-sans font-bold italic text-base lg:text-xl leading-tight"
           >
-            Ridgewell Landscape & Design builds durable, beautiful outdoor
-            spaces for Colorado homes, including patios, retaining walls,
-            walkways, fire pits, outdoor kitchens, and premium outdoor living
-            areas.
+            Ridgewell Landscape & Design helps Denver homeowners create
+            beautiful, low maintenance outdoor spaces with custom landscaping,
+            patios, retaining walls, xeriscaping, outdoor kitchens, and backyard
+            transformations.
           </motion.p>
 
           {/* CTA Row */}
@@ -385,11 +385,14 @@ export default function HeroSection() {
             <motion.a
               href="#consultation"
               whileHover={{
-                scale: 1.04,
-                y: -2,
+                scale: 1.03,
+                y: -3,
+                filter: "brightness(1.08)",
               }}
-              whileTap={{ scale: 0.96 }}
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-8 py-4.5"
+              whileTap={{
+                scale: 0.97,
+              }}
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-8 py-2"
               style={{
                 background:
                   "linear-gradient(135deg, #D94F2B 0%, #E86240 45%, #C63E1D 100%)",
@@ -453,17 +456,14 @@ export default function HeroSection() {
               />
 
               {/* text */}
-              <span
-                className="font-poppins relative z-10 flex items-center gap-3 text-base font-bold tracking-wide"
-                style={{
-                  color: "#fff",
-                }}
-              >
-                Get Your Free Design Consultation
+              <span className="font-poppins relative z-10 flex items-center gap-2 text-base font-bold tracking-wide text-white">
+                Get an Estimate
                 <motion.span
-                  animate={{ x: [0, 4, 0] }}
+                  animate={{
+                    x: [0, 6, 0],
+                  }}
                   transition={{
-                    duration: 1.2,
+                    duration: 1,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}

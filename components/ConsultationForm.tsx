@@ -44,7 +44,7 @@ export type ConsultationRequestBody = {
 
 // https://ridgewellbackend.vercel.app/api/contact 
 
-const CONSULTATION_API = "http://localhost:3000/api/contact";
+const CONSULTATION_API = "https://ridgewellbackend.vercel.app/api/contact";
 
 function normalizePhone(value: string) {
   return value.replace(/\D/g, "");
@@ -515,13 +515,12 @@ export default function ConsultationForm() {
                     </div>
                     <span
                       style={{
-                        fontSize: 10.5,
                         letterSpacing: "0.18em",
                         textTransform: "uppercase",
                         fontWeight: 700,
                         color: C.terra,
-                        fontFamily: "'Satoshi', sans-serif",
                       }}
+                      className="font-sans font-semibold text-sm"
                     >
                       Free Consultation
                     </span>
@@ -535,7 +534,7 @@ export default function ConsultationForm() {
                       lineHeight: 1.2,
                       color: C.deepPlum,
                     }}
-                    className="font-clash "
+                    className="font-jakarta font-bold"
                   >
                     Get Your Free
                     <br />
@@ -545,7 +544,7 @@ export default function ConsultationForm() {
 
                 {/* ── FORM FIELDS ──────────────────────────────────────── */}
                 <form onSubmit={handleSubmit} noValidate>
-                  <div className="px-7 py-5 flex flex-col gap-5">
+                  <div className="px-7 py-5 flex flex-col gap-5 font-sans font-semibold">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Field
                         label="Full Name"
@@ -677,7 +676,7 @@ export default function ConsultationForm() {
                       disabled={loading}
                       whileHover={loading ? {} : { scale: 1.04, y: -2 }}
                       whileTap={loading ? {} : { scale: 0.96 }}
-                      className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl px-8 py-4.5 disabled:opacity-75 disabled:cursor-not-allowed"
+                      className="cursor-pointer group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl px-8 py-4.5 disabled:opacity-75 disabled:cursor-not-allowed"
                       style={{
                         background:
                           "linear-gradient(135deg, #D94F2B 0%, #E86240 45%, #C63E1D 100%)",
