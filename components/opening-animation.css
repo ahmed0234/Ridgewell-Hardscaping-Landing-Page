@@ -58,7 +58,7 @@ body.opening-animation-active #main-content {
   position: absolute;
   inset: -15%;
   z-index: 2;
-  background: url("/Openingleafs.png") center / cover no-repeat;
+  background: url("/Openingleafs.webp") center / cover no-repeat;
   filter: blur(6px) sepia(0.25) saturate(0.6) brightness(0.82);
   opacity: 0.45;
   will-change: transform, opacity;
@@ -82,7 +82,7 @@ body.opening-animation-active #main-content {
   position: absolute;
   inset: 0;
   z-index: 3;
-  background: url("/Openingleafs.png") center / cover no-repeat;
+  background: url("/Openingleafs.webp") center / cover no-repeat;
   filter: sepia(0.1) saturate(0.88) brightness(0.96);
   will-change: transform, opacity;
 }
