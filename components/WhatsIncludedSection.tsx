@@ -43,6 +43,7 @@ const DEFAULT_IMAGES = {
   border: "/services/border.png",
   afterTurf: "/services/beforeTurf.png",
   beforeTurf: "/services/afterTurf.png",
+  xeriscape: "/services/xeriscape.png"
 } as const;
 
 // ─── Topo background lines (decorative only, no illustrations) ───────────────
@@ -810,27 +811,34 @@ export default function ServicesSection({
     },
     {
       number: "05",
+      title: "Xeriscaping & Low Maintenance Landscaping",
+      body: "Reduce water use, lower maintenance, and keep your yard looking beautiful year-round.",
+      accent: "Water-Wise Beauty",
+      image: img("xeriscape", "Decorative Rock and Gravel"),
+    },
+    {
+      number: "06",
       title: "Fire Pits & Seating Areas",
       body: "Create a warm, inviting space for relaxing, entertaining, and enjoying your backyard year round.",
       accent: "Native + Thriving",
       image: img("plants", "Drought Resistant Native Plants"),
     },
     {
-      number: "06",
+      number: "07",
       title: "Outdoor Kitchens & Backyard Features",
       body: "Custom outdoor kitchens, seating areas, walkways, and premium backyard upgrades built for Colorado living",
       accent: "Water Smart",
       image: img("irrigation", "Smart Drip Irrigation System"),
     },
     {
-      number: "07",
+      number: "08",
       title: "Poolside Hardscaping & Stone Decking",
       body: "Add safe, stylish poolside surfaces with durable stone decking built for comfort, drainage, and long term use",
       accent: "Finishing Touch",
       image: img("poolside", "Walkway and Outdoor Features"),
     },
     {
-      number: "08",
+      number: "09",
       title: "Landscape Borders & Edging Systems",
       body: "Give your landscape a cleaner, more finished look with durable edging that keeps everything organized and defined",
       accent: "Finishing Touch",
