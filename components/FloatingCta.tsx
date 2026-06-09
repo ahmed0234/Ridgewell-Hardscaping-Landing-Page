@@ -87,10 +87,10 @@ function ConsultationBadge() {
       whileHover={{ y: -4, scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex items-center justify-center cursor-pointer focus-visible:outline-none z-20 group"
+      className="absolute bottom-[calc(100%+8px)] sm:bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex items-center justify-center cursor-pointer focus-visible:outline-none z-20 group"
     >
       <div
-        className="relative flex items-center gap-2.5 px-4 py-2 overflow-hidden"
+        className="relative flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-4 sm:py-2 overflow-hidden"
         style={{
           background: `rgba(70, 30, 45, 0.75)`, // DEEP semi-transparent
           backdropFilter: "blur(12px)",
@@ -130,7 +130,7 @@ function ConsultationBadge() {
         </motion.div>
 
         {/* Modern Live Indicator */}
-        <div className="relative flex items-center justify-center w-2 h-2 ml-0.5">
+        <div className="relative flex items-center justify-center w-1.5 h-1.5 sm:w-2 sm:h-2 ml-0.5">
           <motion.span
             className="absolute inset-0 rounded-full"
             style={{ backgroundColor: TERRA }}
@@ -144,7 +144,7 @@ function ConsultationBadge() {
         </div>
 
         <span
-          className="font-sans font-bold text-[12px] tracking-widest uppercase relative z-10"
+          className="font-sans font-bold text-[10px] sm:text-[12px] tracking-wider uppercase relative z-10"
           style={{
             color: SAND,
             textShadow: "0 1px 2px rgba(0,0,0,0.5)",
@@ -215,7 +215,7 @@ export default function FloatingCallCTA() {
       {visible && (
         <motion.div
           key="float-cta"
-          className="fixed bottom-6 right-5 sm:bottom-8 sm:right-7 z-[99999] flex flex-col items-end"
+          className="fixed bottom-6 right-3 sm:bottom-8 sm:right-7 z-[99999] flex flex-col items-end"
           initial={{ opacity: 0, y: 56, scale: 0.88 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 36, scale: 0.92 }}
@@ -246,10 +246,9 @@ export default function FloatingCallCTA() {
                 onTouchEnd={() => setPressed(false)}
                 animate={{ scale: pressed ? 0.95 : 1 }}
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className="relative z-10 flex items-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E86240]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#461E2D] font-sans font-bold"
+                className="relative z-10 flex items-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E86240]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#461E2D] font-sans font-bold min-h-[52px] sm:min-h-[58px]"
                 style={{
                   borderRadius: 999,
-                  minHeight: 60,
                   background: expanded
                     ? `linear-gradient(130deg, ${DEEP} 0%, ${PLUM} 100%)`
                     : `linear-gradient(145deg, ${TERRA} 0%, #C94E2A 55%, ${DEEP} 100%)`,
@@ -281,10 +280,9 @@ export default function FloatingCallCTA() {
 
                 {/* ── Icon area ── */}
                 <div
-                  className="relative flex items-center justify-center shrink-0"
-                  style={{ width: 56, height: 60 }}
+                  className="relative flex items-center justify-center shrink-0 w-[40px] h-[40px] sm:w-[56px] sm:h-[60px]"
                 >
-                  <div className="absolute inset-[11px] rounded-full">
+                  <div className="absolute inset-[9px] sm:inset-[11px] rounded-full">
                     <PulseRing delay={0} />
                     <PulseRing delay={1.2} />
                   </div>
@@ -298,7 +296,7 @@ export default function FloatingCallCTA() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <PiPhoneCallFill
-                      size={24}
+                      className="w-5 h-5 sm:w-6 sm:h-6"
                       aria-hidden
                       style={{
                         color: SAND,
@@ -312,12 +310,12 @@ export default function FloatingCallCTA() {
                 </div>
 
                 {/* ── Always-visible label ── */}
-                <div className="flex flex-col justify-center pr-1 min-w-0">
+                <div className="flex flex-col justify-center pr-1 sm:pr-0 min-w-0">
                   <span
                     className="font-sans font-bold leading-none tracking-tight whitespace-nowrap"
                     style={{
                       color: SAND,
-                      fontSize: "clamp(0.9rem, 2.8vw, 1rem)",
+                      fontSize: "clamp(0.85rem, 2.8vw, 1rem)",
                       textShadow: "0 1px 2px rgba(70,30,45,0.35)",
                     }}
                   >
