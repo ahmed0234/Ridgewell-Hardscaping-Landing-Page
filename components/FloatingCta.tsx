@@ -85,19 +85,19 @@ function ConsultationBadge() {
       onMouseLeave={() => setHovered(false)}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -4, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="absolute bottom-[calc(100%-18px)] left-1/2 -translate-x-1/2 flex items-end justify-center cursor-pointer focus-visible:outline-none z-0"
+      className="absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex items-center justify-center cursor-pointer focus-visible:outline-none z-20"
     >
       <div
-        className="relative flex items-center gap-2 px-4 pt-2.5 pb-6 overflow-hidden"
+        className="relative flex items-center gap-2.5 px-5 py-2.5 overflow-hidden"
         style={{
           background: `linear-gradient(135deg, ${TERRA} 0%, #B84220 100%)`,
-          borderRadius: "12px 12px 0 0",
+          borderRadius: "999px",
           boxShadow:
-            "0 -6px 16px rgba(232,98,64,0.35), inset 0 1px 1px rgba(255,255,255,0.4)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          borderBottom: "none",
+            "0 4px 12px rgba(232,98,64,0.35), inset 0 1px 1px rgba(255,255,255,0.4)",
+          border: "1px solid rgba(255,255,255,0.2)",
         }}
       >
         <motion.div
@@ -105,14 +105,24 @@ function ConsultationBadge() {
           initial={{ opacity: 0 }}
           animate={{ opacity: hovered ? 0.15 : 0 }}
         />
-        <div className="relative flex items-center justify-center w-2 h-2">
-          {hovered && (
-            <span className="absolute inline-flex h-4 w-4 rounded-full bg-white opacity-40 animate-ping" />
-          )}
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+        
+        {/* Continuous Blip/Pulse Indicator */}
+        <div className="relative flex items-center justify-center w-2.5 h-2.5">
+          <motion.span
+            className="absolute inset-0 rounded-full bg-white"
+            animate={{ scale: [1, 2.8, 2.8], opacity: [0.6, 0, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", times: [0, 0.6, 1] }}
+          />
+          <motion.span
+            className="absolute inset-0 rounded-full bg-white"
+            animate={{ scale: [1, 2.8, 2.8], opacity: [0.6, 0, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", times: [0, 0.6, 1], delay: 0.4 }}
+          />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-white" style={{ boxShadow: "0 0 6px rgba(255,255,255,0.9)" }} />
         </div>
+
         <span
-          className="font-sans font-black text-[12px] tracking-widest uppercase text-white"
+          className="font-sans font-black text-[11px] tracking-widest uppercase text-white whitespace-nowrap relative z-10"
           style={{ textShadow: "0 1px 2px rgba(0,0,0,0.25)" }}
         >
           Get an Estimate

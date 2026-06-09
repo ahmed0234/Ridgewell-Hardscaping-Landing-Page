@@ -330,10 +330,10 @@ export default function HeroSection() {
               marginBottom: "1.1rem",
               maxWidth: "850px",
             }}
-            className="font-poppins font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
+            className=" font-poppins font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Beautiful <span style={{ color: C.terra }}>Landscaping </span> In
-            Denver Built Around Your Home
+            Custom <span style={{ color: C.terra }}>Landscaping </span> Built To
+            Match Your Home
           </motion.h1>
 
           {/* Sub 1 */}
