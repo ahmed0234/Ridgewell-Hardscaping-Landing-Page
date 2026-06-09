@@ -65,7 +65,6 @@ function LeafSprout() {
   );
 }
 
-// ─── Consultation Badge ────────────────────────────────────────────────────────
 function ConsultationBadge() {
   const [hovered, setHovered] = useState(false);
 
@@ -85,49 +84,84 @@ function ConsultationBadge() {
       onMouseLeave={() => setHovered(false)}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ y: -4, scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex items-center justify-center cursor-pointer focus-visible:outline-none z-20"
+      className="absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex items-center justify-center cursor-pointer focus-visible:outline-none z-20 group"
     >
       <div
-        className="relative flex items-center gap-2.5 px-5 py-2.5 overflow-hidden"
+        className="relative flex items-center gap-2.5 px-4 py-2 overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${TERRA} 0%, #B84220 100%)`,
+          background: `rgba(70, 30, 45, 0.75)`, // DEEP semi-transparent
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
           borderRadius: "999px",
-          boxShadow:
-            "0 4px 12px rgba(232,98,64,0.35), inset 0 1px 1px rgba(255,255,255,0.4)",
-          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: `0 8px 24px rgba(70,30,45,0.3), inset 0 1px 1px rgba(244,222,191,0.25)`,
+          border: `1px solid rgba(244,222,191,0.15)`,
         }}
       >
+        {/* Hover Highlight */}
         <motion.div
-          className="absolute inset-0 bg-white"
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, rgba(244,222,191,0.1) 0%, transparent 100%)`,
+          }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: hovered ? 0.15 : 0 }}
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
         />
-        
-        {/* Continuous Blip/Pulse Indicator */}
-        <div className="relative flex items-center justify-center w-2.5 h-2.5">
-          <motion.span
-            className="absolute inset-0 rounded-full bg-white"
-            animate={{ scale: [1, 2.8, 2.8], opacity: [0.6, 0, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", times: [0, 0.6, 1] }}
+
+        {/* Shimmer Sweep */}
+        <motion.div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
+          <motion.div
+            className="absolute top-0 bottom-0 w-[40px]"
+            style={{
+              background: `linear-gradient(90deg, transparent, rgba(244,222,191,0.15), transparent)`,
+              transform: "skewX(-20deg)",
+            }}
+            animate={{ left: ["-100%", "250%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 2.5,
+              ease: "easeInOut",
+              repeatDelay: 3.5,
+            }}
           />
+        </motion.div>
+
+        {/* Modern Live Indicator */}
+        <div className="relative flex items-center justify-center w-2 h-2 ml-0.5">
           <motion.span
-            className="absolute inset-0 rounded-full bg-white"
-            animate={{ scale: [1, 2.8, 2.8], opacity: [0.6, 0, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", times: [0, 0.6, 1], delay: 0.4 }}
+            className="absolute inset-0 rounded-full"
+            style={{ backgroundColor: TERRA }}
+            animate={{ scale: [1, 2.8], opacity: [0.6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
           />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-white" style={{ boxShadow: "0 0 6px rgba(255,255,255,0.9)" }} />
+          <span
+            className="relative inline-flex rounded-full h-2 w-2"
+            style={{ backgroundColor: TERRA, boxShadow: `0 0 8px ${TERRA}` }}
+          />
         </div>
 
         <span
-          className="font-sans font-black text-[11px] tracking-widest uppercase text-white whitespace-nowrap relative z-10"
-          style={{ textShadow: "0 1px 2px rgba(0,0,0,0.25)" }}
+          className="font-sans font-bold text-[12px] tracking-widest uppercase relative z-10"
+          style={{
+            color: SAND,
+            textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+          }}
         >
           Get an Estimate
         </span>
       </div>
+
+      {/* Soft Hover Glow Behind */}
+      <motion.div
+        className="absolute inset-0 rounded-full -z-10 pointer-events-none"
+        style={{ background: TERRA, filter: "blur(10px)" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hovered ? 0.25 : 0 }}
+        transition={{ duration: 0.3 }}
+      />
     </motion.a>
   );
 }
@@ -213,142 +247,145 @@ export default function FloatingCallCTA() {
                 animate={{ scale: pressed ? 0.95 : 1 }}
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 className="relative z-10 flex items-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E86240]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#461E2D] font-sans font-bold"
-              style={{
-                borderRadius: 999,
-                minHeight: 60,
-                background: expanded
-                  ? `linear-gradient(130deg, ${DEEP} 0%, ${PLUM} 100%)`
-                  : `linear-gradient(145deg, ${TERRA} 0%, #C94E2A 55%, ${DEEP} 100%)`,
-                boxShadow: expanded
-                  ? `0 0 0 1px rgba(244,222,191,0.14), 0 12px 40px rgba(70,30,45,0.55), 0 2px 8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(244,222,191,0.08)`
-                  : `0 0 0 1px rgba(244,222,191,0.1), 0 8px 28px rgba(70,30,45,0.4), 0 2px 6px rgba(232,98,64,0.2), inset 0 1px 0 rgba(244,222,191,0.12)`,
-                transition:
-                  "background 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s cubic-bezier(0.22,1,0.36,1)",
-              }}
-            >
-              {/* Noise grain */}
-              <div
-                aria-hidden
-                className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-soft-light"
-                style={{ backgroundImage: NOISE_SVG, backgroundSize: "160px" }}
-              />
-
-              {/* Top specular */}
-              <div
-                aria-hidden
-                className="absolute top-0 left-[20%] right-[20%] h-px opacity-30 pointer-events-none"
                 style={{
-                  background: `linear-gradient(90deg, transparent, ${SAND}, transparent)`,
+                  borderRadius: 999,
+                  minHeight: 60,
+                  background: expanded
+                    ? `linear-gradient(130deg, ${DEEP} 0%, ${PLUM} 100%)`
+                    : `linear-gradient(145deg, ${TERRA} 0%, #C94E2A 55%, ${DEEP} 100%)`,
+                  boxShadow: expanded
+                    ? `0 0 0 1px rgba(244,222,191,0.14), 0 12px 40px rgba(70,30,45,0.55), 0 2px 8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(244,222,191,0.08)`
+                    : `0 0 0 1px rgba(244,222,191,0.1), 0 8px 28px rgba(70,30,45,0.4), 0 2px 6px rgba(232,98,64,0.2), inset 0 1px 0 rgba(244,222,191,0.12)`,
+                  transition:
+                    "background 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s cubic-bezier(0.22,1,0.36,1)",
                 }}
-              />
-
-              {/* ── Icon area ── */}
-              <div
-                className="relative flex items-center justify-center shrink-0"
-                style={{ width: 56, height: 60 }}
               >
-                <div className="absolute inset-[11px] rounded-full">
-                  <PulseRing delay={0} />
-                  <PulseRing delay={1.2} />
+                {/* Noise grain */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-soft-light"
+                  style={{
+                    backgroundImage: NOISE_SVG,
+                    backgroundSize: "160px",
+                  }}
+                />
+
+                {/* Top specular */}
+                <div
+                  aria-hidden
+                  className="absolute top-0 left-[20%] right-[20%] h-px opacity-30 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(90deg, transparent, ${SAND}, transparent)`,
+                  }}
+                />
+
+                {/* ── Icon area ── */}
+                <div
+                  className="relative flex items-center justify-center shrink-0"
+                  style={{ width: 56, height: 60 }}
+                >
+                  <div className="absolute inset-[11px] rounded-full">
+                    <PulseRing delay={0} />
+                    <PulseRing delay={1.2} />
+                  </div>
+
+                  <motion.div
+                    animate={
+                      expanded
+                        ? { scale: 0.9, rotate: 6 }
+                        : { scale: 1, rotate: 0 }
+                    }
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <PiPhoneCallFill
+                      size={24}
+                      aria-hidden
+                      style={{
+                        color: SAND,
+                        filter: expanded
+                          ? `drop-shadow(0 0 6px ${TERRA}55)`
+                          : "none",
+                        transition: "filter 0.4s ease",
+                      }}
+                    />
+                  </motion.div>
                 </div>
 
-                <motion.div
-                  animate={
-                    expanded
-                      ? { scale: 0.9, rotate: 6 }
-                      : { scale: 1, rotate: 0 }
-                  }
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <PiPhoneCallFill
-                    size={24}
-                    aria-hidden
+                {/* ── Always-visible label ── */}
+                <div className="flex flex-col justify-center pr-1 min-w-0">
+                  <span
+                    className="font-sans font-bold leading-none tracking-tight whitespace-nowrap"
                     style={{
                       color: SAND,
-                      filter: expanded
-                        ? `drop-shadow(0 0 6px ${TERRA}55)`
-                        : "none",
-                      transition: "filter 0.4s ease",
+                      fontSize: "clamp(0.9rem, 2.8vw, 1rem)",
+                      textShadow: "0 1px 2px rgba(70,30,45,0.35)",
                     }}
-                  />
-                </motion.div>
-              </div>
-
-              {/* ── Always-visible label ── */}
-              <div className="flex flex-col justify-center pr-1 min-w-0">
-                <span
-                  className="font-sans font-bold leading-none tracking-tight whitespace-nowrap"
-                  style={{
-                    color: SAND,
-                    fontSize: "clamp(0.9rem, 2.8vw, 1rem)",
-                    textShadow: "0 1px 2px rgba(70,30,45,0.35)",
-                  }}
-                >
-                  Call Us Now
-                </span>
-              </div>
-
-              {/* ── Hover: phone number reveal ── */}
-              <motion.div
-                className="flex flex-col justify-center shrink-0 border-l"
-                initial={false}
-                animate={
-                  expanded
-                    ? {
-                        width: PHONE_PANEL_WIDTH,
-                        opacity: 1,
-                        marginLeft: 10,
-                        paddingLeft: 12,
-                        paddingRight: 4,
-                      }
-                    : {
-                        width: 0,
-                        opacity: 0,
-                        marginLeft: 0,
-                        paddingLeft: 0,
-                        paddingRight: 0,
-                      }
-                }
-                transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  willChange: "width, opacity",
-                  borderColor: expanded
-                    ? "rgba(244,222,191,0.18)"
-                    : "transparent",
-                  overflow: expanded ? "visible" : "hidden",
-                }}
-              >
-                <div className="flex flex-col gap-0.5 whitespace-nowrap w-max min-w-full pr-1">
-                  <span
-                    className="font-satoshi text-[9px] font-semibold tracking-[0.18em] uppercase"
-                    style={{ color: `${SAND}70` }}
                   >
-                    Free estimate
-                  </span>
-                  <span
-                    className="font-sans text-[14px] sm:text-[15px] font-bold tabular-nums tracking-tight"
-                    style={{ color: `${SAND}95` }}
-                  >
-                    {PHONE_DISPLAY}
+                    Call Us Now
                   </span>
                 </div>
-              </motion.div>
 
-              <div className="w-3 shrink-0" aria-hidden />
-            </motion.a>
+                {/* ── Hover: phone number reveal ── */}
+                <motion.div
+                  className="flex flex-col justify-center shrink-0 border-l"
+                  initial={false}
+                  animate={
+                    expanded
+                      ? {
+                          width: PHONE_PANEL_WIDTH,
+                          opacity: 1,
+                          marginLeft: 10,
+                          paddingLeft: 12,
+                          paddingRight: 4,
+                        }
+                      : {
+                          width: 0,
+                          opacity: 0,
+                          marginLeft: 0,
+                          paddingLeft: 0,
+                          paddingRight: 0,
+                        }
+                  }
+                  transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    willChange: "width, opacity",
+                    borderColor: expanded
+                      ? "rgba(244,222,191,0.18)"
+                      : "transparent",
+                    overflow: expanded ? "visible" : "hidden",
+                  }}
+                >
+                  <div className="flex flex-col gap-0.5 whitespace-nowrap w-max min-w-full pr-1">
+                    <span
+                      className="font-satoshi text-[9px] font-semibold tracking-[0.18em] uppercase"
+                      style={{ color: `${SAND}70` }}
+                    >
+                      Free estimate
+                    </span>
+                    <span
+                      className="font-sans text-[14px] sm:text-[15px] font-bold tabular-nums tracking-tight"
+                      style={{ color: `${SAND}95` }}
+                    >
+                      {PHONE_DISPLAY}
+                    </span>
+                  </div>
+                </motion.div>
 
-            {/* Ground shadow */}
-            <div
-              aria-hidden
-              className="absolute -bottom-3 left-1/2 -translate-x-1/2 pointer-events-none"
-              style={{
-                width: expanded ? "85%" : "65%",
-                height: 10,
-                background: `radial-gradient(ellipse, rgba(70,30,45,0.3) 0%, transparent 70%)`,
-                filter: "blur(4px)",
-                transition: "width 0.45s cubic-bezier(0.22,1,0.36,1)",
-              }}
-            />
+                <div className="w-3 shrink-0" aria-hidden />
+              </motion.a>
+
+              {/* Ground shadow */}
+              <div
+                aria-hidden
+                className="absolute -bottom-3 left-1/2 -translate-x-1/2 pointer-events-none"
+                style={{
+                  width: expanded ? "85%" : "65%",
+                  height: 10,
+                  background: `radial-gradient(ellipse, rgba(70,30,45,0.3) 0%, transparent 70%)`,
+                  filter: "blur(4px)",
+                  transition: "width 0.45s cubic-bezier(0.22,1,0.36,1)",
+                }}
+              />
             </div>
           </motion.div>
 
