@@ -10,13 +10,13 @@
  * top of the file, or replace the placeholder strings directly.
  *
  * Default images (public/services — override via `images` prop if needed):
- *   design        → /services/xeriscaping_land.png
- *   beforeLawn    → /services/Before_xesriscape_image.png
- *   afterXeri     → /services/After_xeriscape_image.png
- *   rockGravel    → /services/Decorative_rock_gravel.png
- *   plants        → /services/Drought_resistant_plants.png
- *   irrigation    → /services/Smart_irrigation_system.png
- *   walkway       → /services/Walkways_outdoor_features.png
+ *   design        → /services/hardscaping_land.webp
+ *   beforeLawn    → /services/After_hardscaping_image.webp
+ *   afterXeri     → /services/Before_hardscaping_image.webp
+ *   rockGravel    → /services/Retaining_walls.webp
+ *   plants        → /services/Firepts_seating.webp
+ *   irrigation    → /services/outdoorkitchens.webp
+ *   walkway       → /services/paver_patios.webp
  *
  * Recommended image dimensions:
  *   design / plants → minimum 1400 × 900 px
@@ -32,18 +32,18 @@ import ServiceCarousel from "./ServiceCarousel";
 
 /** Default service images — paths match public/services filenames exactly */
 const DEFAULT_IMAGES = {
-  design: "/services/hardscaping_land.png",
-  beforeLawn: "/services/After_hardscaping_image.png",
-  afterXeri: "/services/Before_hardscaping_image.png",
-  rockGravel: "/services/Retaining_walls.png",
-  plants: "/services/Firepts_seating.png",
-  irrigation: "/services/outdoorkitchens.png",
-  walkway: "/services/paver_patios.png",
-  poolside: "/services/poolside.png",
-  border: "/services/border.png",
-  afterTurf: "/services/beforeTurf.png",
-  beforeTurf: "/services/afterTurf.png",
-  xeriscape: "/services/xeriscape.png"
+  design: "/services/hardscaping_land.webp",
+  beforeLawn: "/services/After_hardscaping_image.webp",
+  afterXeri: "/services/Before_hardscaping_image.webp",
+  rockGravel: "/services/Retaining_walls.webp",
+  plants: "/services/Firepts_seating.webp",
+  irrigation: "/services/outdoorkitchens.webp",
+  walkway: "/services/paver_patios.webp",
+  poolside: "/services/poolside.webp",
+  border: "/services/border.webp",
+  afterTurf: "/services/beforeTurf.webp",
+  beforeTurf: "/services/afterTurf.webp",
+  xeriscape: "/services/xeriscape.webp"
 } as const;
 
 // ─── Topo background lines (decorative only, no illustrations) ───────────────
@@ -763,13 +763,13 @@ const SectionDivider = ({ label, index }) => (
  *
  *   <ServicesSection
  *     images={{
- *       design:     "/images/xeriscape-design.jpg",
- *       rockGravel: "/images/rock-gravel.jpg",
- *       plants:     "/images/drought-plants.jpg",
- *       irrigation: "/images/drip-irrigation.jpg",
- *       walkway:    "/images/walkway-outdoor.jpg",
- *       beforeLawn: "/images/before-lawn.jpg",
- *       afterXeri:  "/images/after-xeriscape.jpg",
+ *       design:     "/services/hardscaping_land.webp",
+ *       rockGravel: "/services/Retaining_walls.webp",
+ *       plants:     "/services/Firepts_seating.webp",
+ *       irrigation: "/services/outdoorkitchens.webp",
+ *       walkway:    "/services/paver_patios.webp",
+ *       beforeLawn: "/services/After_hardscaping_image.webp",
+ *       afterXeri:  "/services/Before_hardscaping_image.webp",
  *     }}
  *   />
  */

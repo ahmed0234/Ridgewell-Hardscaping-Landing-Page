@@ -191,11 +191,13 @@ function BrandMark() {
 
   return (
     <a
-      href="/"
+      href="https://ridgewellcolorado.com/"
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex items-center gap-2 sm:gap-3 md:gap-3.5 outline-none rounded-lg focus-visible:ring-2 focus-visible:ring-[#F4DEBF]/40 min-w-0 group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      aria-label="Ridgewell Landscaping & Design — Home"
+      aria-label="Ridgewell Landscaping & Design — Visit our website"
     >
       {/* Logo — scale only the mark, not the type */}
       <motion.div

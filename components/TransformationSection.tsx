@@ -11,8 +11,8 @@ import DesertHorizonEdge from "./Deserthorizon";
 /* ── Data ───────────────────────────────────────────────────────────────── */
 const transformations = [
   {
-    beforeImage: "/beforeandafter/after_1.png",
-    afterImage: "/beforeandafter/before_1.png",
+    beforeImage: "/beforeandafter/after_1.webp",
+    afterImage: "/beforeandafter/before_1.webp",
     beforeAlt: "Dry patchy lawn before hardscaping",
     afterAlt: "Modern xeriscape with gravel and native plants",
     title: "Paver Patios with Fire Pits & Seating",
@@ -20,8 +20,8 @@ const transformations = [
     waterSaved: "-62% Water",
   },
   {
-    beforeImage: "/beforeandafter/after_2.png",
-    afterImage: "/beforeandafter/before_2.png",
+    beforeImage: "/beforeandafter/after_2.webp",
+    afterImage: "/beforeandafter/before_2.webp",
     beforeAlt: "Overgrown backyard before redesign",
     afterAlt: "Elegant courtyard with succulents and fire pit",
     title: "Custom Retaining Walls & Stone Features",
@@ -29,8 +29,8 @@ const transformations = [
     waterSaved: "-55% Water",
   },
   {
-    beforeImage: "/beforeandafter/walkway_before.png",
-    afterImage: "/beforeandafter/walkway_after.png",
+    beforeImage: "/beforeandafter/walkway_before.webp",
+    afterImage: "/beforeandafter/walkway_after.webp",
     beforeAlt: "Bare entrance with dead grass",
     afterAlt: "Architectural desert garden with ornamental grasses",
     title: "Walkways, Steps & Stone Paths",
@@ -38,8 +38,8 @@ const transformations = [
     waterSaved: "-71% Water",
   },
   {
-    beforeImage: "/beforeandafter/after_4.png",
-    afterImage: "/beforeandafter/before_4.png",
+    beforeImage: "/beforeandafter/after_4.webp",
+    afterImage: "/beforeandafter/before_4.webp",
     beforeAlt: "Bare entrance with dead grass",
     afterAlt: "Architectural desert garden with ornamental grasses",
     title: "Paver Patios with Premium Outdoor Features",
@@ -47,8 +47,8 @@ const transformations = [
     waterSaved: "-71% Water",
   },
   {
-    beforeImage: "/beforeandafter/outdoorkitchen_after.png",
-    afterImage: "/beforeandafter/outdoorkitchen_before.png",
+    beforeImage: "/beforeandafter/outdoorkitchen_after.webp",
+    afterImage: "/beforeandafter/outdoorkitchen_before.webp",
     beforeAlt: "Bare entrance with dead grass",
     afterAlt: "Architectural desert garden with ornamental grasses",
     title: "Outdoor Kitchens",

@@ -213,7 +213,7 @@ export default function HeroSection() {
         style={{ y: bgY, scale: bgScale, willChange: "transform" }}
       >
         <img
-          src="/hero-bg.png"
+          src="/hero-bg.webp"
           alt="Colorado xeriscaped home at golden hour"
           className="w-full h-full object-cover object-center"
           fetchPriority="high"

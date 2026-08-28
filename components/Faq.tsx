@@ -367,7 +367,7 @@ function CTASection() {
       <motion.div
         className="absolute inset-[-10%] bg-cover bg-center"
         style={{
-          backgroundImage: "url('/home-design.png')",
+          backgroundImage: "url('/home-design.webp')",
           y: bgY,
           filter: "saturate(0.75)",
         }}
